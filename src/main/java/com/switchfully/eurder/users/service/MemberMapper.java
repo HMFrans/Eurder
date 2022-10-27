@@ -8,7 +8,7 @@ import com.switchfully.eurder.users.domain.ReturnMemberDto;
 
 public class MemberMapper {
     public Member DtoToMember(NewMemberDto newMemberDto) {
-        return new Member(newMemberDto.getFirstName(), newMemberDto.getLastName(), newMemberDto.getEmailAddress(), newMemberDto.getPhoneNumber(),
+        return new Member(newMemberDto.getPassword(), newMemberDto.getFirstName(), newMemberDto.getLastName(), newMemberDto.getEmailAddress(), newMemberDto.getPhoneNumber(),
                 new Address(newMemberDto.getCity(), newMemberDto.getPostalCode(), newMemberDto.getStreetName(), newMemberDto.getHouseNumber(), newMemberDto.getAdditionalInfo()));
     }
 

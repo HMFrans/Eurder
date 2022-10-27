@@ -17,4 +17,8 @@ public class MemberRepository {
     public List<Member> getMembers() {
         return memberHashMap.values().stream().toList();
     }
+
+    public Member getMember(String id) {
+        return memberHashMap.get(id);
+    }
 }

@@ -10,8 +10,9 @@ public class NewMemberDto {
     private String houseNumber;
     private String additionalInfo;
     private String phoneNumber;
+    private String password;
 
-    public NewMemberDto(String firstName, String lastName, String emailAddress, String city, String postalCode, String streetName, String houseNumber, String additionalInfo, String phoneNumber) {
+    public NewMemberDto(String firstName, String lastName, String emailAddress, String city, String postalCode, String streetName, String houseNumber, String additionalInfo, String phoneNumber, String password) {
         this.firstName = firstName;
         LastName = lastName;
         this.emailAddress = emailAddress;
@@ -21,6 +22,7 @@ public class NewMemberDto {
         this.houseNumber = houseNumber;
         this.additionalInfo = additionalInfo;
         this.phoneNumber = phoneNumber;
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -57,5 +59,9 @@ public class NewMemberDto {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

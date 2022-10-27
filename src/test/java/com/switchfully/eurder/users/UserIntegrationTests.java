@@ -17,17 +17,8 @@ public class UserIntegrationTests {
 
     @Test
     void AddNewMember_HappyPath() {
-        NewMemberDto newMemberDto = new NewMemberDto("Spongebob",
-                "Squarepants",
-                "spongebob@hotmail.com",
-                "Bikini Bottom",
-                "1000",
-                "waterstreet",
-                "1",
-                "",
-                "555-58");
 
-        String body = "{\"firstName\":\"Spongebob\",\"lastName\":\"Squarepants\",\"emailAddress\":\"Squarepants@hotmail.com\",\"city\":\"BikiniBottom\",\"postalCode\":\"1000\",\"streetName\":\"waterstreet\",\"houseNumber\":\"1\",\"additionalInfo\":\"string\",\"phoneNumber\":\"string\"}";
+        String body = "{\"firstName\":\"Spongebob\",\"lastName\":\"Squarepants\",\"emailAddress\":\"Squarepants@hotmail.com\",\"city\":\"BikiniBottom\",\"postalCode\":\"1000\",\"streetName\":\"waterstreet\",\"houseNumber\":\"1\",\"additionalInfo\":\"string\",\"phoneNumber\":\"string\",\"password\":\"string\"}";
 
         ReturnMemberDto returnMemberDto = RestAssured
                 .given()

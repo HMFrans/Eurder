@@ -2,7 +2,6 @@ package com.switchfully.eurder.users.service;
 
 import com.switchfully.eurder.users.domain.NewMemberDto;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +23,8 @@ class ValidatorTest {
                 "waterstreet",
                 "1",
                 "",
-                "555-58");
+                "555-58",
+                "password");
         assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
     }
     @Test
@@ -37,7 +37,8 @@ class ValidatorTest {
                 "waterstreet",
                 "1",
                 "",
-                "555-58");
+                "555-58",
+                "password");
         assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
     }
 
@@ -51,7 +52,8 @@ class ValidatorTest {
                 "waterstreet",
                 "1",
                 "",
-                "555-58");
+                "555-58",
+                "password");
         assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
     }
 
@@ -65,7 +67,8 @@ class ValidatorTest {
                 "waterstreet",
                 "1",
                 "",
-                "555-58");
+                "555-58",
+                "password");
         assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
     }
 
@@ -79,7 +82,8 @@ class ValidatorTest {
                 "waterstreet",
                 "1",
                 "",
-                "555-58");
+                "555-58",
+                "password");
         assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
     }
 
@@ -93,7 +97,8 @@ class ValidatorTest {
                 "",
                 "1",
                 "",
-                "555-58");
+                "555-58",
+                "password");
         assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
     }
 
@@ -107,7 +112,8 @@ class ValidatorTest {
                 "waterstreet",
                 "",
                 "",
-                "555-58");
+                "555-58",
+                "password");
         assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
     }
 
@@ -121,7 +127,8 @@ class ValidatorTest {
                 "waterstreet",
                 "1",
                 "",
-                "");
+                "",
+                "password");
         assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
     }
 

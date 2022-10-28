@@ -6,8 +6,9 @@ import java.util.List;
 
 public class Order {
 
-    private List<ItemGroup> itemGroupList;
+    private List<ItemGroup> itemGroupList = new ArrayList<>();
     private BigDecimal totalPrice;
     private String memberId;
+
 
 }

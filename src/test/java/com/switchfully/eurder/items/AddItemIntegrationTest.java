@@ -1,7 +1,6 @@
 package com.switchfully.eurder.items;
 
-import com.switchfully.eurder.items.domain.Item;
-import com.switchfully.eurder.items.domain.ItemDto;
+import com.switchfully.eurder.items.domain.addItemDto;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
@@ -41,7 +40,7 @@ public class AddItemIntegrationTest {
     void addNewItemByAdmin_noAmountDefaultToZero() {
         String body = "{\"name\":\"flour\",\"description\":\"crushedgrain\",\"price\":\"15.00\"}";
 
-        ItemDto returnedItem = RestAssured
+        addItemDto returnedItem = RestAssured
                 .given()
                 .auth()
                 .preemptive()
@@ -57,7 +56,7 @@ public class AddItemIntegrationTest {
                 .assertThat()
                 .statusCode(HttpStatus.CREATED.value())
                 .extract()
-                .as(ItemDto.class);
+                .as(addItemDto.class);
 
         Assertions.assertEquals(0, returnedItem.getAmount());
     }

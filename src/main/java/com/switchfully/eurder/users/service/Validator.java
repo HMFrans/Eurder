@@ -1,6 +1,6 @@
 package com.switchfully.eurder.users.service;
 
-import com.switchfully.eurder.items.domain.ItemDto;
+import com.switchfully.eurder.items.domain.addItemDto;
 import com.switchfully.eurder.users.domain.NewMemberDto;
 
 public class Validator {
@@ -32,14 +32,14 @@ public class Validator {
         }
     }
 
-    public void checkRequiredFieldsForNewItem(ItemDto itemDto) {
-        if (itemDto.getName() == null || itemDto.getName().equals("")) {
+    public void checkRequiredFieldsForNewItem(addItemDto addItemDto) {
+        if (addItemDto.getName() == null || addItemDto.getName().equals("")) {
             throw new IllegalArgumentException("Please enter a name.");
         }
-        if (itemDto.getDescription() == null || itemDto.getDescription().equals("")) {
+        if (addItemDto.getDescription() == null || addItemDto.getDescription().equals("")) {
             throw new IllegalArgumentException("Please enter a description.");
         }
-        if (itemDto.getPrice() == null || itemDto.getPrice().equals("")) {
+        if (addItemDto.getPrice() == null || addItemDto.getPrice().equals("")) {
             throw new IllegalArgumentException("Please enter a price.");
         }
     }

@@ -4,7 +4,7 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 
 public enum Role {
-    MEMBER(newArrayList()),
+    MEMBER(newArrayList(Feature.CREATE_ORDER)),
     ADMIN(newArrayList(Feature.ADD_ITEM, Feature.MAKE_ADMIN));
 
     private List<Feature> featureList;

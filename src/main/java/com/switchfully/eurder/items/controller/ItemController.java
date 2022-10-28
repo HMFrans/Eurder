@@ -1,6 +1,6 @@
 package com.switchfully.eurder.items.controller;
 
-import com.switchfully.eurder.items.domain.ItemDto;
+import com.switchfully.eurder.items.domain.addItemDto;
 import com.switchfully.eurder.items.service.ItemService;
 import com.switchfully.eurder.security.Feature;
 import com.switchfully.eurder.security.SecurityService;
@@ -26,9 +26,9 @@ public class ItemController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ItemDto addItem(@RequestHeader String authorization, @RequestBody ItemDto itemDto) {
+    public addItemDto addItem(@RequestHeader String authorization, @RequestBody addItemDto addItemDto) {
         securityService.validateAuthorization(authorization, Feature.ADD_ITEM);
-        logger.info("Added " + itemDto.getName() + " to the list");
-        return itemService.addItem(itemDto);
+        logger.info("Added " + addItemDto.getName() + " to the list");
+        return itemService.addItem(addItemDto);
     }
 }

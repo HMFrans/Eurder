@@ -1,7 +1,6 @@
 package com.switchfully.eurder.items.service;
 
-import com.switchfully.eurder.items.domain.Item;
-import com.switchfully.eurder.items.domain.ItemDto;
+import com.switchfully.eurder.items.domain.addItemDto;
 import com.switchfully.eurder.items.domain.ItemRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ItemServiceTest {
@@ -21,9 +18,9 @@ class ItemServiceTest {
 
     @Test
     void givenNewItem_ItemIsAddedToRepository() {
-        ItemDto itemDto = new ItemDto("Flower", "crushed grain", new BigDecimal(15.00), 1);
-        ItemDto actualItemDto = itemService.addItem(itemDto);
+        addItemDto addItemDto = new addItemDto("Flower", "crushed grain", new BigDecimal(15.00), 1);
+        addItemDto actualAddItemDto = itemService.addItem(addItemDto);
 
-        Assertions.assertTrue(itemRepository.getItems().values().stream().anyMatch(item -> actualItemDto.getName().equals(item.getName())));
+        Assertions.assertTrue(itemRepository.getItems().values().stream().anyMatch(item -> actualAddItemDto.getName().equals(item.getName())));
     }
 }

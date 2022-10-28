@@ -2,7 +2,7 @@ package com.switchfully.eurder.items.service;
 
 
 import com.switchfully.eurder.items.domain.Item;
-import com.switchfully.eurder.items.domain.ItemDto;
+import com.switchfully.eurder.items.domain.addItemDto;
 import com.switchfully.eurder.items.domain.ItemMapper;
 import com.switchfully.eurder.items.domain.ItemRepository;
 import com.switchfully.eurder.users.service.Validator;
@@ -20,9 +20,9 @@ public class ItemService {
         this.itemMapper = new ItemMapper();
     }
 
-    public ItemDto addItem(ItemDto itemDto) {
-        validator.checkRequiredFieldsForNewItem(itemDto);
-        Item newItem = itemMapper.dtoToItem(itemDto);
+    public addItemDto addItem(addItemDto addItemDto) {
+        validator.checkRequiredFieldsForNewItem(addItemDto);
+        Item newItem = itemMapper.dtoToItem(addItemDto);
 
         return itemMapper.itemToDto(itemRepository.addItem(newItem));
     }

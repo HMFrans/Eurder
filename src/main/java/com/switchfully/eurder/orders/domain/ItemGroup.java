@@ -1,9 +1,11 @@
 package com.switchfully.eurder.orders.domain;
 
 import com.switchfully.eurder.items.domain.ItemRepository;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
 
 public class ItemGroup {
     private String itemName;
@@ -15,27 +17,26 @@ public class ItemGroup {
 
     private ItemRepository itemRepository;
 
-    public ItemGroup(String itemName, int amountOrdered) {
+    public ItemGroup(String itemName, int amountOrdered, LocalDate shippingDate, BigDecimal itemGroupPrice) {
         this.itemName = itemName;
         this.amountOrdered = amountOrdered;
-        this.shippingDate = calculateShippingDate(itemName);
-        this.itemGroupPrice = calculateItemGroupPrice(itemName);
+        this.shippingDate = shippingDate;
+        this.itemGroupPrice = itemGroupPrice;
     }
 
-    private BigDecimal calculateItemGroupPrice(String itemName) {
-        BigDecimal itemPrice = itemRepository.getItems().get(itemName).getPrice();
-        return itemPrice.multiply(BigDecimal.valueOf(amountOrdered));
+
+
+    public BigDecimal getItemGroupPrice() {
+        return itemGroupPrice;
     }
 
-    private LocalDate calculateShippingDate(String itemName) {
-        int itemAmount = getItemAmount(itemName);
-        if (itemAmount == 0) {
-            return LocalDate.now().plusDays(DAYS_TO_SHIP_WHEN_ITEM_NOT_IN_STOCK);
-        }
-        return LocalDate.now().plusDays(DAYS_TO_SHIP_WHEN_IN_STOCK);
+    public String getItemName() {
+        return itemName;
     }
 
-    private int getItemAmount(String itemName) {
-        return itemRepository.getItems().get(itemName).getAmount();
+    public LocalDate getShippingDate() {
+        return shippingDate;
     }
+
+    //ToDo if item ordered amount should be decreased
 }

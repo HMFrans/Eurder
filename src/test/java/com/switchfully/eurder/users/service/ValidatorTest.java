@@ -1,6 +1,6 @@
 package com.switchfully.eurder.users.service;
 
-import com.switchfully.eurder.items.domain.ItemDto;
+import com.switchfully.eurder.items.domain.addItemDto;
 import com.switchfully.eurder.items.service.ItemService;
 import com.switchfully.eurder.users.domain.NewMemberDto;
 
@@ -140,27 +140,27 @@ class ValidatorTest {
 
     @Test
     void givenNoName_ExceptionIsThrown() {
-        ItemDto itemDto = new ItemDto("",
+        addItemDto addItemDto = new addItemDto("",
                 "crushed grain",
                 new BigDecimal(15.00),
                 2);
-        assertThrows(IllegalArgumentException.class, () -> itemService.addItem(itemDto));
+        assertThrows(IllegalArgumentException.class, () -> itemService.addItem(addItemDto));
     }
     @Test
     void givenNoDescription_ExceptionIsThrown() {
-        ItemDto itemDto = new ItemDto("flour",
+        addItemDto addItemDto = new addItemDto("flour",
                 "",
                 new BigDecimal(15.00),
                 2);
-        assertThrows(IllegalArgumentException.class, () -> itemService.addItem(itemDto));
+        assertThrows(IllegalArgumentException.class, () -> itemService.addItem(addItemDto));
     }
     @Test
     void givenNoPrice_ExceptionIsThrown() {
-        ItemDto itemDto = new ItemDto("flour",
+        addItemDto addItemDto = new addItemDto("flour",
                 "crushed grain",
                 null,
                 2);
-        assertThrows(IllegalArgumentException.class, () -> itemService.addItem(itemDto));
+        assertThrows(IllegalArgumentException.class, () -> itemService.addItem(addItemDto));
     }
 
 

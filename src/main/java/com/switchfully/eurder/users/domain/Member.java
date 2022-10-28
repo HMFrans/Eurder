@@ -57,4 +57,8 @@ public class Member {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

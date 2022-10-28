@@ -7,7 +7,13 @@ import java.util.List;
 
 @Repository
 public class MemberRepository {
-    private HashMap<String, Member> memberHashMap = new HashMap<>();
+    private HashMap<String, Member> memberHashMap;
+
+    public MemberRepository() {
+        this.memberHashMap = new HashMap<>();
+        memberHashMap.put("admin", new Member("password", "admin", "Squarepants", "spongebob@hotmail.com", "555", new Address("1000", "waterstreet", "1", "5", "")));
+        memberHashMap.put("member", new Member("password", "member", "Squarepants", "spongebob@hotmail.com", "555", new Address("1000", "waterstreet", "1", "5", "")));
+    }
 
     public Member addMember(Member member) {
         memberHashMap.put(member.getId(), member);

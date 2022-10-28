@@ -1,5 +1,6 @@
 package com.switchfully.eurder.users.service;
 
+import com.switchfully.eurder.security.Role;
 import com.switchfully.eurder.users.domain.Member;
 import com.switchfully.eurder.users.domain.NewMemberDto;
 import com.switchfully.eurder.users.domain.MemberRepository;
@@ -20,8 +21,12 @@ public class MemberService {
     }
 
     public ReturnMemberDto addNewMember(NewMemberDto newMemberDto) {
-        validator.CheckRequiredFieldsFilledInForNewMember(newMemberDto);
+        validator.checkRequiredFieldsForNewMember(newMemberDto);
         Member newMember = memberMapper.DtoToMember(newMemberDto);
         return memberMapper.memberToDto(memberRepository.addMember(newMember));
+    }
+
+    public void makeAdmin(String userId) {
+        memberRepository.getMember(userId).setRole(Role.ADMIN);
     }
 }

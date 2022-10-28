@@ -1,5 +1,6 @@
 package com.switchfully.eurder.orders.service;
 
+import com.switchfully.eurder.items.domain.ItemRepository;
 import com.switchfully.eurder.orders.domain.*;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,11 @@ public class OrderService {
 
     private OrderMapper orderMapper = new OrderMapper();
     private ItemGroupService itemGroupService;
+    private ItemRepository itemRepository;
 
-    public OrderService(ItemGroupService itemGroupService) {
+    public OrderService(ItemGroupService itemGroupService, ItemRepository itemRepository) {
         this.itemGroupService = itemGroupService;
+        this.itemRepository = itemRepository;
     }
 
 
@@ -21,7 +24,12 @@ public class OrderService {
         Order newOrder = new Order("member");
         populateOrderWithItemGroups(newOrder, orderItemDtoList);
         newOrder.setTotalPrice(calculateTotalPrice(newOrder.getItemGroupList()));
+        reduceStockLevels(orderItemDtoList);
         return orderMapper.OrderToReturnDto(newOrder);
+    }
+
+    private void reduceStockLevels(List<OrderItemDto> orderItemDtoList) {
+        orderItemDtoList.forEach(orderItemDto -> itemRepository.reduceStockLevel(orderItemDto.getName(), orderItemDto.getAmount()));
     }
 
     public void populateOrderWithItemGroups(Order order, List<OrderItemDto> orderItemDtoList) {

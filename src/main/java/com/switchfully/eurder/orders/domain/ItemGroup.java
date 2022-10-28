@@ -50,6 +50,7 @@ public class ItemGroup {
                 ", itemRepository=" + itemRepository +
                 '}';
     }
-
-    //ToDo if item ordered amount should be decreased
+    //ToDo item amount needs to be decreased in stock
+    //ToDo What if an item is not found?
+    //
 }

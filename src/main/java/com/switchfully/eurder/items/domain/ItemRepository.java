@@ -17,6 +17,9 @@ public class ItemRepository {
         this.itemMap = new HashMap<>();
         itemMap.put("flour", new Item("flour", "crushed grain", BigDecimal.valueOf(2), 10 ));
         itemMap.put("egg", new Item("egg", "it was here first", BigDecimal.valueOf(1), 10));
+        itemMap.put("flourTest1", new Item("egg", "it was here first", BigDecimal.valueOf(1), 10));
+        itemMap.put("flourTest2", new Item("egg", "it was here first", BigDecimal.valueOf(1), 10));
+
     }
 
     public Item addItem(Item item) {
@@ -26,5 +29,13 @@ public class ItemRepository {
 
     public HashMap<String, Item> getItems() {
         return itemMap;
+    }
+
+    public void reduceStockLevel(String itemName, int amountOrdered) {
+        int stockAfterOrder = itemMap.get(itemName).getAmount() - amountOrdered;
+        if(stockAfterOrder < 0) {
+            stockAfterOrder = 0;
+        }
+        itemMap.get(itemName).setAmount(stockAfterOrder);
     }
 }

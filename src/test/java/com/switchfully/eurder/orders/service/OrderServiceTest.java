@@ -41,9 +41,4 @@ class OrderServiceTest {
         Assertions.assertEquals(expectedList.toString(), newOrder.getItemGroupList().toString());
     }
 
-    @Test
-    void givenOrderList_NewOrderIsCreated() {
-
-    }
-
 }

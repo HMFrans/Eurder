@@ -24,6 +24,6 @@ class ItemServiceTest {
         ItemDto itemDto = new ItemDto("Flower", "crushed grain", new BigDecimal(15.00), 1);
         ItemDto actualItemDto = itemService.addItem(itemDto);
 
-        Assertions.assertTrue(itemRepository.getItems().stream().anyMatch(item -> actualItemDto.getName().equals(item.getName())));
+        Assertions.assertTrue(itemRepository.getItems().values().stream().anyMatch(item -> actualItemDto.getName().equals(item.getName())));
     }
 }

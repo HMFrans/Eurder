@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
     private MemberService memberService;
-    private final Logger logger = LoggerFactory.getLogger(MemberService.class);
+    private final Logger logger = LoggerFactory.getLogger(MemberController.class);
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }

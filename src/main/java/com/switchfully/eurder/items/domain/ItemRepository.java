@@ -4,20 +4,21 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
 public class ItemRepository {
 
-    private List<Item> itemList = new ArrayList<>();
+    private HashMap<String, Item> itemMap = new HashMap<>();
 
 
     public Item addItem(Item item) {
-        itemList.add(item);
+        itemMap.put(item.getName(), item);
         return item;
     }
 
-    public List<Item> getItems() {
-        return itemList;
+    public HashMap<String, Item> getItems() {
+        return itemMap;
     }
 }

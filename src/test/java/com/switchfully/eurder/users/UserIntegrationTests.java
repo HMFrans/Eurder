@@ -35,5 +35,22 @@ public class UserIntegrationTests {
 
     }
 
+    @Test
+    void makeAdmin_HappyPath() {
+        RestAssured
+                .given()
+                .auth()
+                .preemptive()
+                .basic("admin", "password")
+                .baseUri("http://localhost")
+                .port(port)
+                .when()
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .patch("/admin/memberToAdmin")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.CREATED.value());
+    }
 
 }

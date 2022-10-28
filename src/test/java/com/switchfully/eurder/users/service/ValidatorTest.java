@@ -1,10 +1,14 @@
 package com.switchfully.eurder.users.service;
 
+import com.switchfully.eurder.items.domain.ItemDto;
+import com.switchfully.eurder.items.service.ItemService;
 import com.switchfully.eurder.users.domain.NewMemberDto;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class ValidatorTest {
     @Autowired
     MemberService memberService;
+    @Autowired
+    ItemService itemService;
 
     @Test
     void givenNoFirstName_ExceptionIsThrown() {
@@ -131,6 +137,32 @@ class ValidatorTest {
                 "password");
         assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
     }
+
+    @Test
+    void givenNoName_ExceptionIsThrown() {
+        ItemDto itemDto = new ItemDto("",
+                "crushed grain",
+                new BigDecimal(15.00),
+                2);
+        assertThrows(IllegalArgumentException.class, () -> itemService.addItem(itemDto));
+    }
+    @Test
+    void givenNoDescription_ExceptionIsThrown() {
+        ItemDto itemDto = new ItemDto("flour",
+                "",
+                new BigDecimal(15.00),
+                2);
+        assertThrows(IllegalArgumentException.class, () -> itemService.addItem(itemDto));
+    }
+    @Test
+    void givenNoPrice_ExceptionIsThrown() {
+        ItemDto itemDto = new ItemDto("flour",
+                "crushed grain",
+                null,
+                2);
+        assertThrows(IllegalArgumentException.class, () -> itemService.addItem(itemDto));
+    }
+
 
 
 

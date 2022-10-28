@@ -1,7 +1,10 @@
 package com.switchfully.eurder.items;
 
+import com.switchfully.eurder.items.domain.Item;
+import com.switchfully.eurder.items.domain.ItemDto;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -32,6 +35,31 @@ public class AddItemIntegrationTest {
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.CREATED.value());
+    }
+
+    @Test
+    void addNewItemByAdmin_noAmountDefaultToZero() {
+        String body = "{\"name\":\"flour\",\"description\":\"crushedgrain\",\"price\":\"15.00\"}";
+
+        ItemDto returnedItem = RestAssured
+                .given()
+                .auth()
+                .preemptive()
+                .basic("admin", "password")
+                .baseUri("http://localhost")
+                .port(port)
+                .when()
+                .accept(ContentType.JSON)
+                .body(body)
+                .contentType(ContentType.JSON)
+                .post("/items")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.CREATED.value())
+                .extract()
+                .as(ItemDto.class);
+
+        Assertions.assertEquals(0, returnedItem.getAmount());
     }
 
     @Test

@@ -14,6 +14,7 @@ public class MemberRepository {
         this.memberHashMap = new HashMap<>();
         memberHashMap.put("admin", new Member("password", "admin", "Squarepants", "spongebob@hotmail.com", "555", new Address("1000", "waterstreet", "1", "5", "")));
         memberHashMap.get("admin").setRole(Role.ADMIN);
+        memberHashMap.put("memberToAdmin", new Member("password", "member", "Squarepants", "spongebob@hotmail.com", "555", new Address("1000", "waterstreet", "1", "5", "")));
         memberHashMap.put("member", new Member("password", "member", "Squarepants", "spongebob@hotmail.com", "555", new Address("1000", "waterstreet", "1", "5", "")));
     }
 

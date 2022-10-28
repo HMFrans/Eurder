@@ -1,6 +1,8 @@
 package com.switchfully.eurder.security;
 
 import com.switchfully.eurder.security.exceptions.AccessDeniedException;
+import com.switchfully.eurder.security.exceptions.UnknownUserException;
+import com.switchfully.eurder.security.exceptions.WrongPasswordException;
 import com.switchfully.eurder.users.domain.Member;
 import com.switchfully.eurder.users.domain.MemberRepository;
 import org.slf4j.Logger;
@@ -26,11 +28,11 @@ public class SecurityService {
             Member member = memberRepository.getMember(usernamePassword.getUsername());
             if (member == null) {
                 logger.error("Unknown user" + usernamePassword.getUsername());
-                throw new RuntimeException("Wrong credentials");
+                throw new UnknownUserException();
             }
             if (!member.doesPasswordMatch(usernamePassword.getPassword())) {
                 logger.error("Password does not match for user " + usernamePassword.getUsername());
-                throw new RuntimeException("Wrong credentials");
+                throw new WrongPasswordException();
             }
             if (!member.canHaveAccessTo(feature)) {
                 logger.error("User " + usernamePassword.getUsername() + " does not have access to " + feature);

@@ -38,5 +38,18 @@ public class ItemGroup {
         return shippingDate;
     }
 
+    @Override
+    public String toString() {
+        return "ItemGroup{" +
+                "itemName='" + itemName + '\'' +
+                ", amountOrdered=" + amountOrdered +
+                ", shippingDate=" + shippingDate +
+                ", itemGroupPrice=" + itemGroupPrice +
+                ", DAYS_TO_SHIP_WHEN_ITEM_NOT_IN_STOCK=" + DAYS_TO_SHIP_WHEN_ITEM_NOT_IN_STOCK +
+                ", DAYS_TO_SHIP_WHEN_IN_STOCK=" + DAYS_TO_SHIP_WHEN_IN_STOCK +
+                ", itemRepository=" + itemRepository +
+                '}';
+    }
+
     //ToDo if item ordered amount should be decreased
 }

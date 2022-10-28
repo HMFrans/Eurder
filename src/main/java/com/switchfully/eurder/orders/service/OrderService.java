@@ -24,7 +24,7 @@ public class OrderService {
         return orderMapper.OrderToReturnDto(newOrder);
     }
 
-    private void populateOrderWithItemGroups(Order order, List<OrderItemDto> orderItemDtoList) {
+    public void populateOrderWithItemGroups(Order order, List<OrderItemDto> orderItemDtoList) {
         orderItemDtoList.forEach(orderItemDto -> order.addItemgroupToList(
                 new ItemGroup(
                         orderItemDto.getName(),
@@ -33,10 +33,9 @@ public class OrderService {
                         itemGroupService.calculateItemGroupPrice(orderItemDto))));
     }
 
-    private BigDecimal calculateTotalPrice(List<ItemGroup> itemGroupList) {
+    public BigDecimal calculateTotalPrice(List<ItemGroup> itemGroupList) {
         return itemGroupList.stream()
                 .map((itemGroup -> itemGroup.getItemGroupPrice()))
                 .reduce(BigDecimal.valueOf(0), (itemPrice1, itemprice2) -> itemPrice1.add(itemprice2));
     }
-
 }

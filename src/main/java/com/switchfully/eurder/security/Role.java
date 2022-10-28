@@ -5,7 +5,7 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public enum Role {
     MEMBER(newArrayList()),
-    ADMIN(newArrayList(Feature.ADD_ITEM));
+    ADMIN(newArrayList(Feature.ADD_ITEM, Feature.MAKE_ADMIN));
 
     private List<Feature> featureList;
 

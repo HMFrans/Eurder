@@ -1,5 +1,6 @@
 package com.switchfully.eurder.users.domain;
 
+import com.switchfully.eurder.security.Role;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -12,6 +13,7 @@ public class MemberRepository {
     public MemberRepository() {
         this.memberHashMap = new HashMap<>();
         memberHashMap.put("admin", new Member("password", "admin", "Squarepants", "spongebob@hotmail.com", "555", new Address("1000", "waterstreet", "1", "5", "")));
+        memberHashMap.get("admin").setRole(Role.ADMIN);
         memberHashMap.put("member", new Member("password", "member", "Squarepants", "spongebob@hotmail.com", "555", new Address("1000", "waterstreet", "1", "5", "")));
     }
 

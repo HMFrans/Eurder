@@ -8,7 +8,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class UserIntegrationTests {
+public class MemberIntegrationTests {
 
     @LocalServerPort
     private int port;
@@ -49,6 +49,24 @@ public class UserIntegrationTests {
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.CREATED.value());
+    }
+
+    @Test
+    void getAllMembers_HappyPath() {
+        RestAssured
+                .given()
+                .auth()
+                .preemptive()
+                .basic("admin", "password")
+                .baseUri("http://localhost")
+                .port(port)
+                .when()
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .get("/members")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK.value());
     }
 
 }

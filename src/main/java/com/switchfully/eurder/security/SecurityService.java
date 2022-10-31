@@ -25,7 +25,7 @@ public class SecurityService {
 
         public void validateAuthorization(String authorization, Feature feature) {
             UsernamePassword usernamePassword = getUsernamePassword(authorization);
-            Member member = memberRepository.getMember(usernamePassword.getUsername());
+            Member member = memberRepository.getMemberForSecurityCheck(usernamePassword.getUsername());
             if (member == null) {
                 logger.error("Unknown user" + usernamePassword.getUsername());
                 throw new UnknownUserException();

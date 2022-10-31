@@ -43,6 +43,7 @@ public class MemberService {
     }
 
     public ReturnMemberDto getMember(String memberId) {
+
         return memberMapper.memberToDto(memberRepository.getMember(memberId));
     }
 }

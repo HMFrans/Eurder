@@ -69,4 +69,43 @@ public class MemberIntegrationTests {
                 .statusCode(HttpStatus.OK.value());
     }
 
+    @Test
+    void getMember_happyPath() {
+        RestAssured
+                .given()
+                .auth()
+                .preemptive()
+                .basic("admin", "password")
+                .baseUri("http://localhost")
+                .port(port)
+                .when()
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .get("/members/admin")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK.value());
+    }
+
+    @Test
+    void getMember_NoSuchMember() {
+        RestAssured
+                .given()
+                .auth()
+                .preemptive()
+                .basic("admin", "password")
+                .baseUri("http://localhost")
+                .port(port)
+                .when()
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .get("/members/adminaaaaa")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.NOT_FOUND.value());
+    }
+
+
+
+
 }

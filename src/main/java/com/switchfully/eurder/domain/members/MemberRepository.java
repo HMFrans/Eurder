@@ -1,6 +1,8 @@
 package com.switchfully.eurder.domain.members;
 
 import com.switchfully.eurder.security.Role;
+import com.switchfully.eurder.security.exceptions.UnknownUserException;
+import com.switchfully.eurder.service.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -27,7 +29,14 @@ public class MemberRepository {
         return memberHashMap.values().stream().toList();
     }
 
+    public Member getMemberForSecurityCheck(String id) {
+        return memberHashMap.get(id);
+    }
+
     public Member getMember(String id) {
+        if(memberHashMap.get(id) == null) {
+            throw new UserNotFoundException();
+        }
         return memberHashMap.get(id);
     }
 }

@@ -41,7 +41,7 @@ public class MemberController {
         return memberService.getAllMembers();
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/{memberId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ReturnMemberDto getMember(@RequestHeader String authorization, @PathVariable String memberId) {
         securityService.validateAuthorization(authorization, Feature.GET_MEMBER);

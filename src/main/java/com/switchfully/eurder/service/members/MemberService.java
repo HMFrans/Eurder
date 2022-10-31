@@ -8,6 +8,10 @@ import com.switchfully.eurder.domain.members.ReturnMemberDto;
 import com.switchfully.eurder.service.Validator;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class MemberService {
 
@@ -29,5 +33,12 @@ public class MemberService {
 
     public void makeAdmin(String userId) {
         memberRepository.getMember(userId).setRole(Role.ADMIN);
+    }
+
+    public List<ReturnMemberDto> getAllMembers() {
+        return memberRepository.getMembers()
+                .stream()
+                .map(member -> memberMapper.memberToDto(member))
+                .toList();
     }
 }

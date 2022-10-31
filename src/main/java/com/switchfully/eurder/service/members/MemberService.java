@@ -41,4 +41,8 @@ public class MemberService {
                 .map(member -> memberMapper.memberToDto(member))
                 .toList();
     }
+
+    public ReturnMemberDto getMember(String memberId) {
+        return memberMapper.memberToDto(memberRepository.getMember(memberId));
+    }
 }

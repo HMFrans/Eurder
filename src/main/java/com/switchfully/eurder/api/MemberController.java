@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -38,6 +39,14 @@ public class MemberController {
         securityService.validateAuthorization(authorization, Feature.GET_ALL_MEMBERS);
         logger.info("Getting all members");
         return memberService.getAllMembers();
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping(path = "/{memberId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ReturnMemberDto getMember(@RequestHeader String authorization, @PathVariable String memberId) {
+        securityService.validateAuthorization(authorization, Feature.GET_MEMBER);
+        logger.info("Getting member: " + memberId);
+        return memberService.getMember(memberId);
     }
 
 

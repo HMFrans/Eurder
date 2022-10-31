@@ -1,13 +1,16 @@
 package com.switchfully.eurder.servicetests;
 
-import com.switchfully.eurder.domain.members.MemberRepository;
-import com.switchfully.eurder.domain.members.NewMemberDto;
-import com.switchfully.eurder.domain.members.ReturnMemberDto;
+import com.switchfully.eurder.domain.members.*;
+import com.switchfully.eurder.security.Role;
 import com.switchfully.eurder.service.members.MemberService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @SpringBootTest
 class MemberServiceTest {

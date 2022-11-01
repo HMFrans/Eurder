@@ -21,8 +21,8 @@ public class OrderService {
     }
 
 
-    public ReturnOrderDto createNewOrder(List<OrderItemDto> orderItemDtoList) {
-        Order newOrder = new Order("member");
+    public ReturnOrderDto createNewOrder(String userName, List<OrderItemDto> orderItemDtoList) {
+        Order newOrder = new Order(userName);
         populateOrderWithItemGroups(newOrder, orderItemDtoList);
         newOrder.setTotalPrice(calculateTotalPrice(newOrder.getItemGroupList()));
         reduceStockLevels(orderItemDtoList);

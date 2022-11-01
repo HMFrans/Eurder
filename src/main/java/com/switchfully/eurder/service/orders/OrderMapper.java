@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class OrderMapper {
     public ReturnOrderDto OrderToReturnDto(Order order) {
         return new ReturnOrderDto(order.getOrderId(),
-                createOrderOverview(order),
+                order.getMemberId(), createOrderOverview(order),
                 order.getTotalPrice());
     }
 

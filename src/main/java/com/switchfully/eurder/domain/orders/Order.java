@@ -38,5 +38,7 @@ public class Order {
         return totalPrice;
     }
 
-    
+    public String getMemberId() {
+        return memberId;
+    }
 }

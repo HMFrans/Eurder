@@ -30,10 +30,11 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ReturnOrderDto createOrder(@RequestHeader String authorization, @RequestBody List<OrderItemDto> orderItemDtoList) {
-        securityService.validateAuthorization(authorization, Feature.CREATE_ORDER);
+        String userName = securityService.validateAuthorization(authorization, Feature.CREATE_ORDER);
         logger.info("New order is created");
-        return orderService.createNewOrder(orderItemDtoList);
+        return orderService.createNewOrder(userName, orderItemDtoList);
     }
+
 
 
 }

@@ -49,5 +49,4 @@ public class MemberController {
         return memberService.getMember(memberId);
     }
 
-
 }

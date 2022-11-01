@@ -23,7 +23,7 @@ public class SecurityService {
             this.memberRepository = memberRepository;
         }
 
-        public void validateAuthorization(String authorization, Feature feature) {
+        public String validateAuthorization(String authorization, Feature feature) {
             UsernamePassword usernamePassword = getUsernamePassword(authorization);
             Member member = memberRepository.getMemberForSecurityCheck(usernamePassword.getUsername());
             if (member == null) {
@@ -38,6 +38,7 @@ public class SecurityService {
                 logger.error("User " + usernamePassword.getUsername() + " does not have access to " + feature);
                 throw new AccessDeniedException();
             }
+            return usernamePassword.getUsername();
 
         }
 

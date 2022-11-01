@@ -5,18 +5,20 @@ import java.time.LocalDate;
 import java.util.HashMap;
 
 public class ReturnOrderDto {
-    private String OrderId;
+    private String orderId;
+    private String orderedBy;
     private HashMap<String, LocalDate> shippingDates;
     private BigDecimal totalCost;
 
-    public ReturnOrderDto(String orderId, HashMap<String, LocalDate> shippingDates, BigDecimal totalPrice) {
-        OrderId = orderId;
+    public ReturnOrderDto(String orderId, String orderedBy, HashMap<String, LocalDate> shippingDates, BigDecimal totalPrice) {
+        this.orderId = orderId;
+        this.orderedBy = orderedBy;
         this.shippingDates = shippingDates;
         this.totalCost = totalPrice;
     }
 
     public String getOrderId() {
-        return OrderId;
+        return orderId;
     }
 
     public HashMap<String, LocalDate> getShippingDates() {
@@ -27,4 +29,7 @@ public class ReturnOrderDto {
         return totalCost;
     }
 
+    public String getOrderedBy() {
+        return orderedBy;
+    }
 }

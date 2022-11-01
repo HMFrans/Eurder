@@ -6,5 +6,13 @@ import java.util.HashMap;
 
 @Repository
 public class OrderRepository {
-    private HashMap<String, Order> OrdersMap = new HashMap<>();
+    private HashMap<String, Order> ordersMap = new HashMap<>();
+
+    public void addOrder(Order order) {
+        ordersMap.put(order.getOrderId(), order);
+    }
+
+    public HashMap<String, Order> getAllOrders() {
+        return ordersMap;
+    }
 }

@@ -22,7 +22,6 @@ public class ItemService {
     public addItemDto addItem(addItemDto addItemDto) {
         validator.checkRequiredFieldsForNewItem(addItemDto);
         Item newItem = itemMapper.dtoToItem(addItemDto);
-
         return itemMapper.itemToDto(itemRepository.addItem(newItem));
     }
 }

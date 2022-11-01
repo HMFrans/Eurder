@@ -34,7 +34,7 @@ public class OrderIntegrationTest {
     }
 
     @Test
-    void createOrderByNonLoggedInUser_HappyPath() {
+    void createOrderByNonLoggedInUser_Unauthorized() {
         String body = "[{\"name\":\"flour\",\"amount\":2},{\"name\":\"egg\",\"amount\":100}]";
 
         RestAssured
@@ -52,6 +52,27 @@ public class OrderIntegrationTest {
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.UNAUTHORIZED.value());
+    }
+
+    @Test
+    void createOrderWithoutItems_Exception() {
+        String body = "[]";
+
+        RestAssured
+                .given()
+                .auth()
+                .preemptive()
+                .basic("member", "password")
+                .baseUri("http://localhost")
+                .port(port)
+                .when()
+                .accept(ContentType.JSON)
+                .body(body)
+                .contentType(ContentType.JSON)
+                .post("/order")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.NO_CONTENT.value());
     }
 
 

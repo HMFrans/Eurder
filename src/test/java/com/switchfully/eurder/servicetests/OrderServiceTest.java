@@ -3,6 +3,7 @@ package com.switchfully.eurder.servicetests;
 import com.switchfully.eurder.domain.orders.ItemGroup;
 import com.switchfully.eurder.domain.orders.Order;
 import com.switchfully.eurder.domain.orders.OrderItemDto;
+import com.switchfully.eurder.domain.orders.OrderRepository;
 import com.switchfully.eurder.service.orders.OrderService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,8 @@ class OrderServiceTest {
 
     @Autowired
     private OrderService orderService;
+    @Autowired
+    OrderRepository orderRepository;
 
     @Test
     void givenItemGroupList_returnCorrectOrderPrice() {
@@ -38,6 +41,15 @@ class OrderServiceTest {
         expectedList.add(new ItemGroup("flour", 5, LocalDate.now().plusDays(1), BigDecimal.valueOf(10)));
 
         Assertions.assertEquals(expectedList.toString(), newOrder.getItemGroupList().toString());
+    }
+
+    @Test
+    void givenNewOrder_OrderIsAddedToRepository() {
+        List<OrderItemDto> orderItemDtoList = new ArrayList<>();
+        orderItemDtoList.add(new OrderItemDto("flour", 1));
+        orderService.createNewOrder("memberForTest", orderItemDtoList);
+
+        Assertions.assertTrue(orderRepository.getAllOrders().values().stream().anyMatch(order -> order.getMemberId().equals("memberForTest")));
     }
 
 }

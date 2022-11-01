@@ -2,6 +2,7 @@ package com.switchfully.eurder.service.orders;
 
 import com.switchfully.eurder.domain.items.ItemRepository;
 import com.switchfully.eurder.domain.orders.*;
+import com.switchfully.eurder.service.Validator;
 import com.switchfully.eurder.service.items.ItemGroupService;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +15,22 @@ public class OrderService {
     private OrderMapper orderMapper = new OrderMapper();
     private ItemGroupService itemGroupService;
     private ItemRepository itemRepository;
+    private OrderRepository orderRepository;
+    private Validator validator = new Validator();
 
-    public OrderService(ItemGroupService itemGroupService, ItemRepository itemRepository) {
+    public OrderService(ItemGroupService itemGroupService, ItemRepository itemRepository, OrderRepository orderRepository) {
         this.itemGroupService = itemGroupService;
         this.itemRepository = itemRepository;
+        this.orderRepository = orderRepository;
     }
 
 
     public ReturnOrderDto createNewOrder(String userName, List<OrderItemDto> orderItemDtoList) {
+        validator.checkItemListOnNewOrder(orderItemDtoList);
         Order newOrder = new Order(userName);
         populateOrderWithItemGroups(newOrder, orderItemDtoList);
         newOrder.setTotalPrice(calculateTotalPrice(newOrder.getItemGroupList()));
+        orderRepository.addOrder(newOrder);
         reduceStockLevels(orderItemDtoList);
         return orderMapper.OrderToReturnDto(newOrder);
     }
@@ -47,4 +53,8 @@ public class OrderService {
                 .map((itemGroup -> itemGroup.getItemGroupPrice()))
                 .reduce(BigDecimal.valueOf(0), (itemPrice1, itemprice2) -> itemPrice1.add(itemprice2));
     }
+
+//    public List<ReturnOrderDto> getAllOrdersByMember(String userName) {
+//        return
+//    }
 }

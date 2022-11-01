@@ -54,7 +54,10 @@ public class OrderService {
                 .reduce(BigDecimal.valueOf(0), (itemPrice1, itemprice2) -> itemPrice1.add(itemprice2));
     }
 
-//    public List<ReturnOrderDto> getAllOrdersByMember(String userName) {
-//        return
-//    }
+    public List<ReturnOrderDto> getAllOrdersByMember(String userName) {
+        List<Order> listOfOrders = orderRepository.getAllOrders().values().stream()
+                .filter(order -> order.getMemberId().equals(userName))
+                .toList();
+        return orderMapper.orderListToReturnDtoList(listOfOrders);
+    }
 }

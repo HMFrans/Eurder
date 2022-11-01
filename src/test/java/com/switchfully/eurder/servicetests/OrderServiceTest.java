@@ -1,10 +1,9 @@
 package com.switchfully.eurder.servicetests;
 
-import com.switchfully.eurder.domain.orders.ItemGroup;
-import com.switchfully.eurder.domain.orders.Order;
-import com.switchfully.eurder.domain.orders.OrderItemDto;
-import com.switchfully.eurder.domain.orders.OrderRepository;
+import com.switchfully.eurder.domain.orders.*;
+import com.switchfully.eurder.service.orders.OrderMapper;
 import com.switchfully.eurder.service.orders.OrderService;
+import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,7 @@ class OrderServiceTest {
     private OrderService orderService;
     @Autowired
     OrderRepository orderRepository;
+    private OrderMapper orderMapper = new OrderMapper();
 
     @Test
     void givenItemGroupList_returnCorrectOrderPrice() {
@@ -51,5 +51,7 @@ class OrderServiceTest {
 
         Assertions.assertTrue(orderRepository.getAllOrders().values().stream().anyMatch(order -> order.getMemberId().equals("memberForTest")));
     }
+
+
 
 }

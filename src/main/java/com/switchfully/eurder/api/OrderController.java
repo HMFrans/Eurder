@@ -35,13 +35,13 @@ public class OrderController {
         return orderService.createNewOrder(userName, orderItemDtoList);
     }
 
-//    @ResponseStatus(HttpStatus.OK)
-//    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//    public List<ReturnOrderDto> getAllOrdersByMember(@RequestHeader String authorization) {
-//        String userName = securityService.validateAuthorization(authorization, Feature.GET_ALL_ORDERS_BY_MEMBER);
-//        logger.info("Getting all orders for " + userName);
-//        return orderService.getAllOrdersByMember(userName);
-//    }
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ReturnOrderDto> getAllOrdersByMember(@RequestHeader String authorization) {
+        String userName = securityService.validateAuthorization(authorization, Feature.GET_ALL_ORDERS_BY_MEMBER);
+        logger.info("Getting all orders for " + userName);
+        return orderService.getAllOrdersByMember(userName);
+    }
 
 
 

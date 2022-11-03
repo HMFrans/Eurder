@@ -25,7 +25,7 @@ public class SecurityUnitTests {
                 .when()
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
-                .patch("/admin/member")
+                .post("/admin/member")
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.UNAUTHORIZED.value());
@@ -44,7 +44,7 @@ public class SecurityUnitTests {
                 .when()
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
-                .patch("/admin/member")
+                .post("/admin/member")
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.UNAUTHORIZED.value());

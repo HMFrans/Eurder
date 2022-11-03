@@ -45,7 +45,7 @@ public class MemberIntegrationTests {
                 .when()
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
-                .patch("/admin/memberToAdmin")
+                .post("/admin/memberToAdmin")
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.CREATED.value());

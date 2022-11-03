@@ -26,7 +26,7 @@ public class AdminController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PatchMapping(path = "/{userId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/{userId}",produces = MediaType.APPLICATION_JSON_VALUE)
     public void makeMemberAdmin(@RequestHeader String authorization, @PathVariable String userId) {
         securityService.validateAuthorization(authorization, Feature.MAKE_ADMIN);
         memberService.makeAdmin(userId);

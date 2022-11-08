@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
 @Service
 public class MemberService {
 
-    private MemberRepository memberRepository;
-    private MemberMapper memberMapper;
-    private Validator validator;
+    private final MemberRepository memberRepository;
+    private final MemberMapper memberMapper;
+    private final Validator validator;
 
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
@@ -32,7 +32,7 @@ public class MemberService {
     }
 
     public void makeAdmin(String userId) {
-        memberRepository.getMember(userId).setRole(Role.ADMIN);
+        memberRepository.makeAdmin(userId);
     }
 
     public List<ReturnMemberDto> getAllMembers() {
@@ -40,10 +40,10 @@ public class MemberService {
                 .stream()
                 .map(member -> memberMapper.memberToDto(member))
                 .toList();
+
     }
 
     public ReturnMemberDto getMember(String memberId) {
-
         return memberMapper.memberToDto(memberRepository.getMember(memberId));
     }
 }

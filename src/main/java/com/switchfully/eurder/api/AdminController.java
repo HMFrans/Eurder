@@ -16,8 +16,8 @@ import java.util.List;
 @RequestMapping(path = "/admin")
 public class AdminController {
 
-    private MemberService memberService;
-    private SecurityService securityService;
+    private final MemberService memberService;
+    private final SecurityService securityService;
     private final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     public AdminController(MemberService memberService, SecurityService securityService) {

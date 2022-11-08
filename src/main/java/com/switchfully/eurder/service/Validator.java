@@ -1,6 +1,6 @@
 package com.switchfully.eurder.service;
 
-import com.switchfully.eurder.domain.items.addItemDto;
+import com.switchfully.eurder.domain.items.AddItemDto;
 import com.switchfully.eurder.domain.members.NewMemberDto;
 import com.switchfully.eurder.domain.orders.OrderItemDto;
 import com.switchfully.eurder.security.SecurityService;
@@ -8,7 +8,6 @@ import com.switchfully.eurder.service.exceptions.NoItemInListException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class Validator {
@@ -50,7 +49,7 @@ public class Validator {
         }
     }
 
-    public void checkRequiredFieldsForNewItem(addItemDto addItemDto) {
+    public void checkRequiredFieldsForNewItem(AddItemDto addItemDto) {
         if (addItemDto.getName() == null || addItemDto.getName().equals("")) {
             logger.error("No item name");
             throw new IllegalArgumentException("Please enter a name.");

@@ -8,6 +8,9 @@ import java.util.HashMap;
 public class OrderRepository {
     private HashMap<String, Order> ordersMap = new HashMap<>();
 
+    public OrderRepository() {
+        ordersMap.put("1", new Order("member"));
+    }
 
     public void addOrder(Order order) {
         ordersMap.put(order.getOrderId(), order);

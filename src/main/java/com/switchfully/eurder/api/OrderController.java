@@ -17,8 +17,8 @@ import java.util.List;
 @RequestMapping(path = "/order")
 public class OrderController {
 
-    private OrderService orderService;
-    private SecurityService securityService;
+    private final OrderService orderService;
+    private final SecurityService securityService;
 
     private final Logger logger = LoggerFactory.getLogger(OrderController.class);
 

@@ -75,5 +75,23 @@ public class OrderIntegrationTest {
                 .statusCode(HttpStatus.NO_CONTENT.value());
     }
 
+    @Test
+    void getAllOrdersForSpecificMember() {
+        RestAssured
+                .given()
+                .auth()
+                .preemptive()
+                .basic("member", "password")
+                .baseUri("http://localhost")
+                .port(port)
+                .when()
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .get("/order")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK.value());
+    }
+
 
 }

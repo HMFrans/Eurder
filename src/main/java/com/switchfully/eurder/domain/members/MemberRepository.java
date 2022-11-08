@@ -1,7 +1,6 @@
 package com.switchfully.eurder.domain.members;
 
 import com.switchfully.eurder.security.Role;
-import com.switchfully.eurder.security.exceptions.UnknownUserException;
 import com.switchfully.eurder.service.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Repository;
 
@@ -39,4 +38,10 @@ public class MemberRepository {
         }
         return memberHashMap.get(id);
     }
+
+    public void makeAdmin(String userId) {
+        getMember(userId).setRole(Role.ADMIN);
+    }
+
+
 }

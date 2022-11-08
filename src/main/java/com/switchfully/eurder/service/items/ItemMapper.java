@@ -1,15 +1,15 @@
 package com.switchfully.eurder.service.items;
 
 import com.switchfully.eurder.domain.items.Item;
-import com.switchfully.eurder.domain.items.addItemDto;
+import com.switchfully.eurder.domain.items.AddItemDto;
 
 public class ItemMapper {
 
-    public Item dtoToItem(addItemDto addItemDto) {
+    public Item dtoToItem(AddItemDto addItemDto) {
         return new Item(addItemDto.getName(), addItemDto.getDescription(), addItemDto.getPrice(), addItemDto.getAmount());
     }
 
-    public addItemDto itemToDto(Item item) {
-        return new addItemDto(item.getName(), item.getDescription(), item.getPrice(), item.getAmount());
+    public AddItemDto itemToDto(Item item) {
+        return new AddItemDto(item.getName(), item.getDescription(), item.getPrice(), item.getAmount());
     }
 }

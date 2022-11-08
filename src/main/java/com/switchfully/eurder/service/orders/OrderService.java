@@ -12,11 +12,11 @@ import java.util.List;
 @Service
 public class OrderService {
 
-    private OrderMapper orderMapper = new OrderMapper();
-    private ItemGroupService itemGroupService;
-    private ItemRepository itemRepository;
-    private OrderRepository orderRepository;
-    private Validator validator = new Validator();
+    private final OrderMapper orderMapper = new OrderMapper();
+    private final ItemGroupService itemGroupService;
+    private final ItemRepository itemRepository;
+    private final OrderRepository orderRepository;
+    private final Validator validator = new Validator();
 
     public OrderService(ItemGroupService itemGroupService, ItemRepository itemRepository, OrderRepository orderRepository) {
         this.itemGroupService = itemGroupService;

@@ -18,8 +18,8 @@ import java.util.List;
 @RequestMapping(path = "/members")
 public class MemberController {
 
-    private MemberService memberService;
-    private SecurityService securityService;
+    private final MemberService memberService;
+    private final SecurityService securityService;
     private final Logger logger = LoggerFactory.getLogger(MemberController.class);
     public MemberController(MemberService memberService, SecurityService securityService) {
         this.memberService = memberService;

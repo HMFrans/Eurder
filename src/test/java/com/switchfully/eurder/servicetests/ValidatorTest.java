@@ -1,6 +1,6 @@
 package com.switchfully.eurder.servicetests;
 
-import com.switchfully.eurder.domain.items.addItemDto;
+import com.switchfully.eurder.domain.items.AddItemDto;
 import com.switchfully.eurder.service.items.ItemService;
 import com.switchfully.eurder.domain.members.NewMemberDto;
 
@@ -141,7 +141,7 @@ class ValidatorTest {
 
     @Test
     void givenNoName_ExceptionIsThrown() {
-        addItemDto addItemDto = new addItemDto("",
+        AddItemDto addItemDto = new AddItemDto("",
                 "crushed grain",
                 new BigDecimal(15.00),
                 2);
@@ -149,7 +149,7 @@ class ValidatorTest {
     }
     @Test
     void givenNoDescription_ExceptionIsThrown() {
-        addItemDto addItemDto = new addItemDto("flour",
+        AddItemDto addItemDto = new AddItemDto("flour",
                 "",
                 new BigDecimal(15.00),
                 2);
@@ -157,7 +157,7 @@ class ValidatorTest {
     }
     @Test
     void givenNoPrice_ExceptionIsThrown() {
-        addItemDto addItemDto = new addItemDto("flour",
+        AddItemDto addItemDto = new AddItemDto("flour",
                 "crushed grain",
                 null,
                 2);

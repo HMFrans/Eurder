@@ -2,13 +2,13 @@ package com.switchfully.eurder.domain.items;
 
 import java.math.BigDecimal;
 
-public class addItemDto {
+public class AddItemDto {
     private String name;
     private String description;
     private BigDecimal price;
     private int amount;
 
-    public addItemDto(String name, String description, BigDecimal price, int amount) {
+    public AddItemDto(String name, String description, BigDecimal price, int amount) {
         this.name = name;
         this.description = description;
         this.price = price;

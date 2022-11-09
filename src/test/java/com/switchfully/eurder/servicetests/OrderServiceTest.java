@@ -25,18 +25,18 @@ class OrderServiceTest {
 
     @Test
     void givenItemGroupList_returnCorrectOrderPrice() {
-        List<ItemGroup> itemGroupList = new ArrayList<>();
-        itemGroupList.add(new ItemGroup("flour", 15, LocalDate.now(), BigDecimal.valueOf(10)));
+        List<OrderItemDto> orderItemDtoListTest = new ArrayList<>();
+        orderItemDtoListTest.add(new OrderItemDto("flour", 5));
+        Order newOrder = new Order("member", orderItemDtoListTest);
 
-        Assertions.assertEquals(BigDecimal.valueOf(10), orderService.calculateTotalPrice(itemGroupList) );
+        Assertions.assertEquals(BigDecimal.valueOf(10), newOrder.calculateTotalPrice(newOrder.getItemGroupList()) );
     }
 
     @Test
     void givenEmptyOrderAndListOfItemsToOrder_AddItemsAsItemGroupsToOrder() {
-        Order newOrder = new Order("member");
         List<OrderItemDto> orderItemDtoList = new ArrayList<>();
         orderItemDtoList.add(new OrderItemDto("flour", 5));
-        orderService.populateOrderWithItemGroups(newOrder, orderItemDtoList);
+        Order newOrder = new Order("member", orderItemDtoList);
         List<ItemGroup> expectedList = new ArrayList<>();
         expectedList.add(new ItemGroup("flour", 5, LocalDate.now().plusDays(1), BigDecimal.valueOf(10)));
 

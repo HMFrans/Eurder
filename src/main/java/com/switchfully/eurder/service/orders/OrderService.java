@@ -27,9 +27,7 @@ public class OrderService {
 
     public ReturnOrderDto createNewOrder(String userName, List<OrderItemDto> orderItemDtoList) {
         validator.checkItemListOnNewOrder(orderItemDtoList);
-        Order newOrder = new Order(userName);
-        populateOrderWithItemGroups(newOrder, orderItemDtoList);
-        newOrder.setTotalPrice(calculateTotalPrice(newOrder.getItemGroupList()));
+        Order newOrder = new Order(userName, orderItemDtoList);
         orderRepository.addOrder(newOrder);
         reduceStockLevels(orderItemDtoList);
         return orderMapper.OrderToReturnDto(newOrder);
@@ -37,21 +35,6 @@ public class OrderService {
 
     private void reduceStockLevels(List<OrderItemDto> orderItemDtoList) {
         orderItemDtoList.forEach(orderItemDto -> itemRepository.reduceStockLevel(orderItemDto.getName(), orderItemDto.getAmount()));
-    }
-
-    public void populateOrderWithItemGroups(Order order, List<OrderItemDto> orderItemDtoList) {
-        orderItemDtoList.forEach(orderItemDto -> order.addItemgroupToList(
-                new ItemGroup(
-                        orderItemDto.getName(),
-                        orderItemDto.getAmount(),
-                        itemGroupService.calculateShippingDate(orderItemDto),
-                        itemGroupService.calculateItemGroupPrice(orderItemDto))));
-    }
-
-    public BigDecimal calculateTotalPrice(List<ItemGroup> itemGroupList) {
-        return itemGroupList.stream()
-                .map((itemGroup -> itemGroup.getItemGroupPrice()))
-                .reduce(BigDecimal.valueOf(0), (itemPrice1, itemprice2) -> itemPrice1.add(itemprice2));
     }
 
     public List<ReturnOrderDto> getAllOrdersByMember(String userName) {

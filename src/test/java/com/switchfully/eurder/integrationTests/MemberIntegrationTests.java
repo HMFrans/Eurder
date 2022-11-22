@@ -102,7 +102,7 @@ public class MemberIntegrationTests {
                 .get("/members/adminaaaaa")
                 .then()
                 .assertThat()
-                .statusCode(HttpStatus.NOT_FOUND.value());
+                .statusCode(HttpStatus.BAD_REQUEST.value());
     }
 
 

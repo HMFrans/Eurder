@@ -28,7 +28,7 @@ public class MemberController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ReturnMemberDto createNewMember(@RequestBody NewMemberDto newMemberDto) {
-        logger.info("Member added to database");
+        logger.info("Adding member to database");
         return memberService.addNewMember(newMemberDto);
     }
 

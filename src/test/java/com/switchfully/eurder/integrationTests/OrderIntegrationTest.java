@@ -72,7 +72,7 @@ public class OrderIntegrationTest {
                 .post("/order")
                 .then()
                 .assertThat()
-                .statusCode(HttpStatus.NO_CONTENT.value());
+                .statusCode(HttpStatus.BAD_REQUEST.value());
     }
 
     @Test

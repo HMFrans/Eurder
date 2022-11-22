@@ -5,7 +5,8 @@ import com.switchfully.eurder.security.Role;
 
 import java.util.UUID;
 
-public class Member {
+
+public class Customer {
     private String id;
     private String password;
     private String firstName;
@@ -15,7 +16,7 @@ public class Member {
     private String phoneNumber;
     private Role role;
 
-    public Member(String password, String firstName, String lastName, String emailAddress, String phoneNumber, Address address) {
+    public Customer(String password, String firstName, String lastName, String emailAddress, String phoneNumber, Address address) {
         this.password = password;
         this.id = UUID.randomUUID().toString();
         this.firstName = firstName;

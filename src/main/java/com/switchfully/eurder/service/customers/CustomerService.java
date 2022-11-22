@@ -1,31 +1,31 @@
-package com.switchfully.eurder.service.members;
+package com.switchfully.eurder.service.customers;
 
-import com.switchfully.eurder.domain.members.Member;
-import com.switchfully.eurder.service.members.dto.NewMemberDto;
+import com.switchfully.eurder.domain.members.Customer;
+import com.switchfully.eurder.service.customers.dto.NewMemberDto;
 import com.switchfully.eurder.domain.members.MemberRepository;
-import com.switchfully.eurder.service.members.dto.ReturnMemberDto;
+import com.switchfully.eurder.service.customers.dto.ReturnMemberDto;
 import com.switchfully.eurder.service.Validator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class MemberService {
+public class CustomerService {
 
     private final MemberRepository memberRepository;
-    private final MemberMapper memberMapper;
+    private final CustomerMapper customerMapper;
     private final Validator validator;
 
-    public MemberService(MemberRepository memberRepository) {
+    public CustomerService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
         this.validator = new Validator();
-        this.memberMapper = new MemberMapper();
+        this.customerMapper = new CustomerMapper();
     }
 
     public ReturnMemberDto addNewMember(NewMemberDto newMemberDto) {
         validator.checkRequiredFieldsForNewMember(newMemberDto);
-        Member newMember = memberMapper.DtoToMember(newMemberDto);
-        return memberMapper.memberToDto(memberRepository.addMember(newMember));
+        Customer newCustomer = customerMapper.DtoToMember(newMemberDto);
+        return customerMapper.memberToDto(memberRepository.addMember(newCustomer));
     }
 
     public void makeAdmin(String userId) {
@@ -35,12 +35,12 @@ public class MemberService {
     public List<ReturnMemberDto> getAllMembers() {
         return memberRepository.getMembers()
                 .stream()
-                .map(member -> memberMapper.memberToDto(member))
+                .map(customer -> customerMapper.memberToDto(customer))
                 .toList();
 
     }
 
     public ReturnMemberDto getMember(String memberId) {
-        return memberMapper.memberToDto(memberRepository.getMember(memberId));
+        return customerMapper.memberToDto(memberRepository.getMember(memberId));
     }
 }

@@ -1,7 +1,7 @@
 package com.switchfully.eurder.service;
 
 import com.switchfully.eurder.service.items.dto.AddItemDto;
-import com.switchfully.eurder.service.members.dto.NewMemberDto;
+import com.switchfully.eurder.service.customers.dto.NewMemberDto;
 import com.switchfully.eurder.service.orders.dto.OrderItemDto;
 
 import java.util.List;

@@ -4,7 +4,7 @@ import com.switchfully.eurder.service.items.dto.AddItemDto;
 import com.switchfully.eurder.service.items.ItemService;
 import com.switchfully.eurder.security.Feature;
 import com.switchfully.eurder.security.SecurityService;
-import com.switchfully.eurder.service.members.MemberService;
+import com.switchfully.eurder.service.customers.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class ItemController {
     private final SecurityService securityService;
     private final ItemService itemService;
 
-    private final Logger logger = LoggerFactory.getLogger(MemberService.class);
+    private final Logger logger = LoggerFactory.getLogger(CustomerService.class);
 
     public ItemController(SecurityService securityService, ItemService itemService) {
         this.securityService = securityService;

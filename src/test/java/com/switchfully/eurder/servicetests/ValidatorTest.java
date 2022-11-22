@@ -2,9 +2,9 @@ package com.switchfully.eurder.servicetests;
 
 import com.switchfully.eurder.service.items.dto.AddItemDto;
 import com.switchfully.eurder.service.items.ItemService;
-import com.switchfully.eurder.service.members.dto.NewMemberDto;
+import com.switchfully.eurder.service.customers.dto.NewMemberDto;
 
-import com.switchfully.eurder.service.members.MemberService;
+import com.switchfully.eurder.service.customers.CustomerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class ValidatorTest {
     @Autowired
-    MemberService memberService;
+    CustomerService customerService;
     @Autowired
     ItemService itemService;
 
@@ -32,7 +32,7 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
     }
     @Test
     void givenNoLastName_ExceptionIsThrown() {
@@ -46,7 +46,7 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
     }
 
     @Test
@@ -61,7 +61,7 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
     }
 
     @Test
@@ -76,7 +76,7 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
     }
 
     @Test
@@ -91,7 +91,7 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
     }
 
     @Test
@@ -106,7 +106,7 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
     }
 
     @Test
@@ -121,7 +121,7 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
     }
 
     @Test
@@ -136,7 +136,7 @@ class ValidatorTest {
                 "",
                 "",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> memberService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
     }
 
     @Test

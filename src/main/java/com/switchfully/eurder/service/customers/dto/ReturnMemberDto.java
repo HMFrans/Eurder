@@ -1,4 +1,4 @@
-package com.switchfully.eurder.service.members.dto;
+package com.switchfully.eurder.service.customers.dto;
 
 import com.switchfully.eurder.domain.members.Address;
 

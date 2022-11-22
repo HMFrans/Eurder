@@ -9,30 +9,30 @@ import java.util.List;
 
 @Repository
 public class MemberRepository {
-    private HashMap<String, Member> memberHashMap;
+    private HashMap<String, Customer> memberHashMap;
 
     public MemberRepository() {
         this.memberHashMap = new HashMap<>();
-        memberHashMap.put("admin", new Member("password", "admin", "Squarepants", "spongebob@hotmail.com", "555", new Address("1000", "waterstreet", "1", "5", "")));
+        memberHashMap.put("admin", new Customer("password", "admin", "Squarepants", "spongebob@hotmail.com", "555", new Address("1000", "waterstreet", "1", "5", "")));
         memberHashMap.get("admin").setRole(Role.ADMIN);
-        memberHashMap.put("memberToAdmin", new Member("password", "member", "Squarepants", "spongebob@hotmail.com", "555", new Address("1000", "waterstreet", "1", "5", "")));
-        memberHashMap.put("member", new Member("password", "member", "Squarepants", "spongebob@hotmail.com", "555", new Address("1000", "waterstreet", "1", "5", "")));
+        memberHashMap.put("memberToAdmin", new Customer("password", "member", "Squarepants", "spongebob@hotmail.com", "555", new Address("1000", "waterstreet", "1", "5", "")));
+        memberHashMap.put("member", new Customer("password", "member", "Squarepants", "spongebob@hotmail.com", "555", new Address("1000", "waterstreet", "1", "5", "")));
     }
 
-    public Member addMember(Member member) {
-        memberHashMap.put(member.getId(), member);
-        return memberHashMap.get(member.getId());
+    public Customer addMember(Customer customer) {
+        memberHashMap.put(customer.getId(), customer);
+        return memberHashMap.get(customer.getId());
     }
 
-    public List<Member> getMembers() {
+    public List<Customer> getMembers() {
         return memberHashMap.values().stream().toList();
     }
 
-    public Member getMemberForSecurityCheck(String id) {
+    public Customer getMemberForSecurityCheck(String id) {
         return memberHashMap.get(id);
     }
 
-    public Member getMember(String id) {
+    public Customer getMember(String id) {
         if(memberHashMap.get(id) == null) {
             throw new UserNotFoundException();
         }

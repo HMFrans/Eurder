@@ -2,7 +2,7 @@ package com.switchfully.eurder.api;
 
 import com.switchfully.eurder.security.Feature;
 import com.switchfully.eurder.security.SecurityService;
-import com.switchfully.eurder.service.members.MemberService;
+import com.switchfully.eurder.service.customers.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/admin")
 public class AdminController {
 
-    private final MemberService memberService;
+    private final CustomerService customerService;
     private final SecurityService securityService;
     private final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
-    public AdminController(MemberService memberService, SecurityService securityService) {
-        this.memberService = memberService;
+    public AdminController(CustomerService customerService, SecurityService securityService) {
+        this.customerService = customerService;
         this.securityService = securityService;
     }
 
@@ -26,7 +26,7 @@ public class AdminController {
     @PostMapping(path = "/{userId}",produces = MediaType.APPLICATION_JSON_VALUE)
     public void makeMemberAdmin(@RequestHeader String authorization, @PathVariable String userId) {
         securityService.validateAuthorization(authorization, Feature.MAKE_ADMIN);
-        memberService.makeAdmin(userId);
+        customerService.makeAdmin(userId);
         logger.info("Member " + userId + "was upgraded to admin");
     }
 

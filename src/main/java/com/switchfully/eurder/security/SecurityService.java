@@ -3,7 +3,7 @@ package com.switchfully.eurder.security;
 import com.switchfully.eurder.security.exceptions.AccessDeniedException;
 import com.switchfully.eurder.security.exceptions.UnknownUserException;
 import com.switchfully.eurder.security.exceptions.WrongPasswordException;
-import com.switchfully.eurder.domain.members.Member;
+import com.switchfully.eurder.domain.members.Customer;
 import com.switchfully.eurder.domain.members.MemberRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,16 +25,16 @@ public class SecurityService {
 
         public String validateAuthorization(String authorization, Feature feature) {
             UsernamePassword usernamePassword = getUsernamePassword(authorization);
-            Member member = memberRepository.getMemberForSecurityCheck(usernamePassword.getUsername());
-            if (member == null) {
+            Customer customer = memberRepository.getMemberForSecurityCheck(usernamePassword.getUsername());
+            if (customer == null) {
                 logger.error("Unknown user" + usernamePassword.getUsername());
                 throw new UnknownUserException();
             }
-            if (!member.doesPasswordMatch(usernamePassword.getPassword())) {
+            if (!customer.doesPasswordMatch(usernamePassword.getPassword())) {
                 logger.error("Password does not match for user " + usernamePassword.getUsername());
                 throw new WrongPasswordException();
             }
-            if (!member.canHaveAccessTo(feature)) {
+            if (!customer.canHaveAccessTo(feature)) {
                 logger.error("User " + usernamePassword.getUsername() + " does not have access to " + feature);
                 throw new AccessDeniedException();
             }

@@ -1,18 +1,18 @@
 package com.switchfully.eurder.controllerTests;
 
-import com.switchfully.eurder.api.MemberController;
-import com.switchfully.eurder.service.members.MemberService;
+import com.switchfully.eurder.api.CustomerController;
+import com.switchfully.eurder.service.customers.CustomerService;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class MemberControllerTests {
+public class CustomerControllerTests {
     @InjectMocks
-    private MemberController memberController;
+    private CustomerController customerController;
     @Mock
-    private MemberService memberService;
+    private CustomerService customerService;
 
 //    @Test
 //    void addMemberCallsMemberService() {

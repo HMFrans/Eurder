@@ -1,18 +1,32 @@
 package com.switchfully.eurder.domain.items;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
+@Table(name = "item")
 public class Item {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_seq")
+    @SequenceGenerator(name = "item_seq", sequenceName = "item_seq",allocationSize = 1)
+    private Integer Id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "description")
     private String description;
+    @Column(name = "price")
     private BigDecimal price;
-    private int amount;
+    @Column(name = "amount_in_stock")
+    private int amountInStock;
 
-    public Item(String name, String description, BigDecimal price, int amount) {
+    public Item() {
+    }
+
+    public Item(String name, String description, BigDecimal price, int amountInStock) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.amount = amount;
+        this.amountInStock = amountInStock;
     }
 
     public String getName() {
@@ -27,11 +41,11 @@ public class Item {
         return price;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getAmountInStock() {
+        return amountInStock;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setAmountInStock(int amount) {
+        this.amountInStock = amount;
     }
 }

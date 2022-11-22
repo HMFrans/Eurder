@@ -20,7 +20,7 @@ class OrderServiceTest {
     @Autowired
     private OrderService orderService;
     @Autowired
-    OrderRepository orderRepository;
+    OrderRepositoryOld orderRepositoryOld;
     private OrderMapper orderMapper = new OrderMapper();
 
     @Test
@@ -49,7 +49,7 @@ class OrderServiceTest {
         orderItemDtoList.add(new OrderItemDto("flour", 1));
         orderService.createNewOrder("memberForTest", orderItemDtoList);
 
-        Assertions.assertTrue(orderRepository.getAllOrders().values().stream().anyMatch(order -> order.getMemberId().equals("memberForTest")));
+        Assertions.assertTrue(orderRepositoryOld.getAllOrders().values().stream().anyMatch(order -> order.getCustomer().equals("memberForTest")));
     }
 
 

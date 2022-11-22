@@ -32,7 +32,7 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
     }
     @Test
     void givenNoLastName_ExceptionIsThrown() {
@@ -46,7 +46,7 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
     }
 
     @Test
@@ -61,7 +61,7 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
     }
 
     @Test
@@ -76,7 +76,7 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
     }
 
     @Test
@@ -91,7 +91,7 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
     }
 
     @Test
@@ -106,7 +106,7 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
     }
 
     @Test
@@ -121,7 +121,7 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
     }
 
     @Test
@@ -136,7 +136,7 @@ class ValidatorTest {
                 "",
                 "",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewMember(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
     }
 
     @Test

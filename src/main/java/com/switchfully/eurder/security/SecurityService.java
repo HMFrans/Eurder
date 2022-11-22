@@ -1,10 +1,10 @@
 package com.switchfully.eurder.security;
 
+import com.switchfully.eurder.domain.customers.CustomerRepository;
 import com.switchfully.eurder.security.exceptions.AccessDeniedException;
 import com.switchfully.eurder.security.exceptions.UnknownUserException;
 import com.switchfully.eurder.security.exceptions.WrongPasswordException;
-import com.switchfully.eurder.domain.members.Customer;
-import com.switchfully.eurder.domain.members.MemberRepository;
+import com.switchfully.eurder.domain.customers.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -17,15 +17,15 @@ public class SecurityService {
 
         private final Logger logger = LoggerFactory.getLogger(SecurityService.class);
 
-        private MemberRepository memberRepository;
+        private CustomerRepository customerRepository;
 
-        public SecurityService(MemberRepository memberRepository) {
-            this.memberRepository = memberRepository;
+        public SecurityService(CustomerRepository customerRepository) {
+            this.customerRepository = customerRepository;
         }
 
         public String validateAuthorization(String authorization, Feature feature) {
             UsernamePassword usernamePassword = getUsernamePassword(authorization);
-            Customer customer = memberRepository.getMemberForSecurityCheck(usernamePassword.getUsername());
+            Customer customer = customerRepository.findCustomerByEmailAddress(usernamePassword.getUsername());
             if (customer == null) {
                 logger.error("Unknown user" + usernamePassword.getUsername());
                 throw new UnknownUserException();

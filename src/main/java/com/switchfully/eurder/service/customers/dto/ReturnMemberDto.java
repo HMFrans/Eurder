@@ -1,16 +1,16 @@
 package com.switchfully.eurder.service.customers.dto;
 
-import com.switchfully.eurder.domain.members.Address;
+import com.switchfully.eurder.domain.customers.Address;
 
 public class ReturnMemberDto {
-    private String id;
+    private Integer id;
     private String firstName;
     private String LastName;
     private String emailAddress;
     private Address address;
     private String phoneNumber;
 
-    public ReturnMemberDto(String id, String firstName, String lastName, String emailAddress, Address address, String phoneNumber) {
+    public ReturnMemberDto(Integer id, String firstName, String lastName, String emailAddress, Address address, String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         LastName = lastName;
@@ -19,7 +19,7 @@ public class ReturnMemberDto {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 

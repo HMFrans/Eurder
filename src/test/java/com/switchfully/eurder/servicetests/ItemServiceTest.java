@@ -1,7 +1,6 @@
 package com.switchfully.eurder.servicetests;
 
 import com.switchfully.eurder.service.items.dto.AddItemDto;
-import com.switchfully.eurder.domain.items.ItemRepository;
 import com.switchfully.eurder.service.items.ItemService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

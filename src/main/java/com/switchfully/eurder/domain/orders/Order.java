@@ -1,43 +1,36 @@
 package com.switchfully.eurder.domain.orders;
 
-import com.switchfully.eurder.domain.items.ItemRepository;
-import com.switchfully.eurder.service.items.ItemGroupService;
-import com.switchfully.eurder.service.orders.dto.OrderItemDto;
+import com.switchfully.eurder.domain.customers.Customer;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
+
+@Entity
+@Table(name = "customer_order")
 public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_group_seq")
+    @SequenceGenerator(name = "item_group_seq", sequenceName = "item_group_seq",allocationSize = 1)
+    private String Id;
 
-    private final ItemGroupService itemGroupService = new ItemGroupService(new ItemRepository());
-
-    private String orderId;
-    private List<ItemGroup> itemGroupList;
+    @Column(name = "total_price")
     private BigDecimal totalPrice = BigDecimal.valueOf(0);
-    private String memberId;
+    @OneToOne
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    private Customer customer;
 
-    public Order(String memberId, List<OrderItemDto> orderItemDtoList) {
-        this.orderId = UUID.randomUUID().toString();
-        this.itemGroupList = new ArrayList<>();
-        populateOrderWithItemGroups(orderItemDtoList);
-        this.memberId = memberId;
-        this.totalPrice = calculateTotalPrice(itemGroupList);
+
+
+    public Order() {
     }
 
-    public void populateOrderWithItemGroups(List<OrderItemDto> orderItemDtoList) {
-        orderItemDtoList.forEach(orderItemDto -> this.addItemgroupToList(
-                new ItemGroup(
-                        orderItemDto.getName(),
-                        orderItemDto.getAmount(),
-                        itemGroupService.calculateShippingDate(orderItemDto),
-                        itemGroupService.calculateItemGroupPrice(orderItemDto))));
+    public Order(Customer customer) {
+        this.customer = customer;
+
     }
 
-    public void addItemgroupToList(ItemGroup itemGroup) {
-        itemGroupList.add(itemGroup);
-    }
 
     public BigDecimal calculateTotalPrice(List<ItemGroup> itemGroupList) {
         return itemGroupList.stream()
@@ -46,19 +39,16 @@ public class Order {
     }
 
 
-    public String getOrderId() {
-        return orderId;
+    public String getId() {
+        return Id;
     }
 
-    public List<ItemGroup> getItemGroupList() {
-        return itemGroupList;
-    }
 
     public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public String getMemberId() {
-        return memberId;
+    public Customer getCustomer() {
+        return customer;
     }
 }

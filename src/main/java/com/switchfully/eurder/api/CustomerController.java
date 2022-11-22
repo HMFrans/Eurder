@@ -29,7 +29,7 @@ public class CustomerController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ReturnMemberDto createNewMember(@RequestBody NewMemberDto newMemberDto) {
         logger.info("Adding member to database");
-        return customerService.addNewMember(newMemberDto);
+        return customerService.addNewCustomer(newMemberDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -37,15 +37,15 @@ public class CustomerController {
     public List<ReturnMemberDto> getAllMembers(@RequestHeader String authorization) {
         securityService.validateAuthorization(authorization, Feature.GET_ALL_MEMBERS);
         logger.info("Getting all members");
-        return customerService.getAllMembers();
+        return customerService.getAllCustomers();
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/{memberId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ReturnMemberDto getMember(@RequestHeader String authorization, @PathVariable String memberId) {
+    public ReturnMemberDto getMember(@RequestHeader String authorization, @PathVariable Integer memberId) {
         securityService.validateAuthorization(authorization, Feature.GET_MEMBER);
         logger.info("Getting member: " + memberId);
-        return customerService.getMember(memberId);
+        return customerService.getCustomer(memberId);
     }
 
 }

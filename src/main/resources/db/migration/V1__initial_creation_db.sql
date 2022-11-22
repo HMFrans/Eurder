@@ -20,7 +20,8 @@ create table customer
     last_name       varchar,
     email_address   varchar,
     phone_number    varchar,
-    address         integer references address
+    address_id      integer references address,
+    role            varchar
 );
 
 create sequence order_seq start with 1 increment by 1;

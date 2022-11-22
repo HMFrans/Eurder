@@ -1,7 +1,7 @@
 package com.switchfully.eurder.servicetests;
 
+import com.switchfully.eurder.domain.customers.CustomerRepository;
 import com.switchfully.eurder.security.Role;
-import com.switchfully.eurder.domain.members.MemberRepository;
 import com.switchfully.eurder.service.customers.CustomerService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,13 +13,13 @@ public class AdminServiceTest {
     @Autowired
     private CustomerService customerService;
     @Autowired
-    private MemberRepository memberRepository;
+    private CustomerRepository customerRepository;
 
     @Test
     void givenMemberId_UpgradesToAdmin() {
         customerService.makeAdmin("member");
 
-        Assertions.assertEquals(Role.ADMIN, memberRepository.getMember("member").getRole());
+        Assertions.assertEquals(Role.ADMIN, customerRepository.g("member").getRole());
     }
 
 }

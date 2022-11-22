@@ -1,24 +1,39 @@
-package com.switchfully.eurder.domain.members;
+package com.switchfully.eurder.domain.customers;
 
 import com.switchfully.eurder.security.Feature;
 import com.switchfully.eurder.security.Role;
 
-import java.util.UUID;
+import javax.persistence.*;
 
-
+@Entity
+@Table(name = "customer")
 public class Customer {
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_seq")
+    @SequenceGenerator(name = "customer_seq", sequenceName = "customer_seq", allocationSize = 1)
+    private Integer id;
+    @Column(name = "password")
     private String password;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String LastName;
+    @Column(name = "email_address")
     private String emailAddress;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
     private Address address;
+    @Column(name = "phone_number")
     private String phoneNumber;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     private Role role;
+
+    public Customer() {
+    }
 
     public Customer(String password, String firstName, String lastName, String emailAddress, String phoneNumber, Address address) {
         this.password = password;
-        this.id = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.LastName = lastName;
         this.emailAddress = emailAddress;
@@ -35,7 +50,7 @@ public class Customer {
         return role.containsFeature(feature);
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 

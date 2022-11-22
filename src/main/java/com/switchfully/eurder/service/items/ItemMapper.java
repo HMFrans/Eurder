@@ -10,6 +10,6 @@ public class ItemMapper {
     }
 
     public AddItemDto itemToDto(Item item) {
-        return new AddItemDto(item.getName(), item.getDescription(), item.getPrice(), item.getAmount());
+        return new AddItemDto(item.getName(), item.getDescription(), item.getPrice(), item.getAmountInStock());
     }
 }

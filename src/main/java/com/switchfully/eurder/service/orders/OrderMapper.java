@@ -9,15 +9,15 @@ import java.util.List;
 
 public class OrderMapper {
     public ReturnOrderDto OrderToReturnDto(Order order) {
-        return new ReturnOrderDto(order.getOrderId(),
-                order.getMemberId(), createOrderOverview(order),
+        return new ReturnOrderDto(order.getId(),
+                order.getCustomer().getEmailAddress(), createOrderOverview(order),
                 order.getTotalPrice());
     }
 
     private HashMap<String, LocalDate> createOrderOverview(Order order) {
-        HashMap<String, LocalDate> orderOverview = new HashMap<>();
-        order.getItemGroupList().forEach(itemGroup -> orderOverview.put(itemGroup.getItemName(), itemGroup.getShippingDate()));
-        return orderOverview;
+//        HashMap<String, LocalDate> orderOverview = new HashMap<>();
+//        order.getItemGroupList().forEach(itemGroup -> orderOverview.put(itemGroup.getItemName(), itemGroup.getShippingDate()));
+        return null;
     }
 
     public List<ReturnOrderDto> orderListToReturnDtoList(List<Order> listOfOrders) {

@@ -1,6 +1,5 @@
 package com.switchfully.eurder.servicetests;
 
-import com.switchfully.eurder.domain.members.*;
 import com.switchfully.eurder.service.customers.CustomerService;
 import com.switchfully.eurder.service.customers.dto.NewMemberDto;
 import com.switchfully.eurder.service.customers.dto.ReturnMemberDto;
@@ -19,7 +18,7 @@ class CustomerServiceTest {
     @Test
     void givenNewMemberDto_MemberGetsAddedToRepository() {
         NewMemberDto newMemberDto = new NewMemberDto("Spongebob", "Squarepants", "spongebob@hotmail.com", "Bikini Bottom", "1000", "waterstreet", "1", "", "555-58", "password");
-        ReturnMemberDto newReturnMemberDto = customerService.addNewMember(newMemberDto);
+        ReturnMemberDto newReturnMemberDto = customerService.addNewCustomer(newMemberDto);
 
         Assertions.assertTrue(memberRepository.getMembers().stream().anyMatch(member -> newReturnMemberDto.getId().equals(member.getId())));
     }

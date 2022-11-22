@@ -1,16 +1,13 @@
 package com.switchfully.eurder.service.members;
 
-import com.switchfully.eurder.security.Role;
 import com.switchfully.eurder.domain.members.Member;
-import com.switchfully.eurder.domain.members.NewMemberDto;
+import com.switchfully.eurder.service.members.dto.NewMemberDto;
 import com.switchfully.eurder.domain.members.MemberRepository;
-import com.switchfully.eurder.domain.members.ReturnMemberDto;
+import com.switchfully.eurder.service.members.dto.ReturnMemberDto;
 import com.switchfully.eurder.service.Validator;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MemberService {

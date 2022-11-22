@@ -1,5 +1,6 @@
 package com.switchfully.eurder.domain.orders;
 
+import com.switchfully.eurder.service.orders.dto.OrderItemDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

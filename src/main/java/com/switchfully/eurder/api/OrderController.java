@@ -1,7 +1,7 @@
 package com.switchfully.eurder.api;
 
-import com.switchfully.eurder.domain.orders.OrderItemDto;
-import com.switchfully.eurder.domain.orders.ReturnOrderDto;
+import com.switchfully.eurder.service.orders.dto.OrderItemDto;
+import com.switchfully.eurder.service.orders.dto.ReturnOrderDto;
 import com.switchfully.eurder.service.orders.OrderService;
 import com.switchfully.eurder.security.Feature;
 import com.switchfully.eurder.security.SecurityService;

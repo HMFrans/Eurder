@@ -1,7 +1,7 @@
 package com.switchfully.eurder.service.orders;
 
 import com.switchfully.eurder.domain.orders.Order;
-import com.switchfully.eurder.domain.orders.ReturnOrderDto;
+import com.switchfully.eurder.service.orders.dto.ReturnOrderDto;
 
 import java.time.LocalDate;
 import java.util.HashMap;

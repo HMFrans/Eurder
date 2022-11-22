@@ -1,8 +1,8 @@
 package com.switchfully.eurder.servicetests;
 
-import com.switchfully.eurder.domain.items.AddItemDto;
+import com.switchfully.eurder.service.items.dto.AddItemDto;
 import com.switchfully.eurder.service.items.ItemService;
-import com.switchfully.eurder.domain.members.NewMemberDto;
+import com.switchfully.eurder.service.members.dto.NewMemberDto;
 
 import com.switchfully.eurder.service.members.MemberService;
 import org.junit.jupiter.api.Test;

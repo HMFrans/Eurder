@@ -1,7 +1,7 @@
 package com.switchfully.eurder.service.items;
 
 import com.switchfully.eurder.domain.items.ItemRepository;
-import com.switchfully.eurder.domain.orders.OrderItemDto;
+import com.switchfully.eurder.service.orders.dto.OrderItemDto;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

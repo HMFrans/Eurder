@@ -1,4 +1,4 @@
-package com.switchfully.eurder.domain.items;
+package com.switchfully.eurder.service.items.dto;
 
 import java.math.BigDecimal;
 

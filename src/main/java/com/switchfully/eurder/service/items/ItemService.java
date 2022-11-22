@@ -2,7 +2,7 @@ package com.switchfully.eurder.service.items;
 
 
 import com.switchfully.eurder.domain.items.Item;
-import com.switchfully.eurder.domain.items.AddItemDto;
+import com.switchfully.eurder.service.items.dto.AddItemDto;
 import com.switchfully.eurder.domain.items.ItemRepository;
 import com.switchfully.eurder.service.Validator;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.switchfully.eurder.api;
 
-import com.switchfully.eurder.domain.members.NewMemberDto;
-import com.switchfully.eurder.domain.members.ReturnMemberDto;
+import com.switchfully.eurder.service.members.dto.NewMemberDto;
+import com.switchfully.eurder.service.members.dto.ReturnMemberDto;
 import com.switchfully.eurder.security.Feature;
 import com.switchfully.eurder.security.SecurityService;
 import com.switchfully.eurder.service.members.MemberService;
@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController

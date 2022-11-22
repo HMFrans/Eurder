@@ -2,6 +2,7 @@ package com.switchfully.eurder.domain.orders;
 
 import com.switchfully.eurder.domain.items.ItemRepository;
 import com.switchfully.eurder.service.items.ItemGroupService;
+import com.switchfully.eurder.service.orders.dto.OrderItemDto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

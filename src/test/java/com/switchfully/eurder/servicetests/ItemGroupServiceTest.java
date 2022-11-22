@@ -1,6 +1,6 @@
 package com.switchfully.eurder.servicetests;
 
-import com.switchfully.eurder.domain.orders.OrderItemDto;
+import com.switchfully.eurder.service.orders.dto.OrderItemDto;
 import com.switchfully.eurder.service.items.ItemGroupService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.switchfully.eurder.domain.orders;
+package com.switchfully.eurder.service.orders.dto;
 
 public class OrderItemDto {
     private String name;

@@ -1,4 +1,6 @@
-package com.switchfully.eurder.domain.members;
+package com.switchfully.eurder.service.members.dto;
+
+import com.switchfully.eurder.domain.members.Address;
 
 public class ReturnMemberDto {
     private String id;

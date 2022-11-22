@@ -1,6 +1,6 @@
 package com.switchfully.eurder.integrationTests;
 
-import com.switchfully.eurder.domain.items.AddItemDto;
+import com.switchfully.eurder.service.items.dto.AddItemDto;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;

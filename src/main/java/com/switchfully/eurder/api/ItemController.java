@@ -1,6 +1,6 @@
 package com.switchfully.eurder.api;
 
-import com.switchfully.eurder.domain.items.AddItemDto;
+import com.switchfully.eurder.service.items.dto.AddItemDto;
 import com.switchfully.eurder.service.items.ItemService;
 import com.switchfully.eurder.security.Feature;
 import com.switchfully.eurder.security.SecurityService;

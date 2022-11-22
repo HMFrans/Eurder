@@ -1,8 +1,8 @@
 package com.switchfully.eurder.service;
 
-import com.switchfully.eurder.domain.items.AddItemDto;
-import com.switchfully.eurder.domain.members.NewMemberDto;
-import com.switchfully.eurder.domain.orders.OrderItemDto;
+import com.switchfully.eurder.service.items.dto.AddItemDto;
+import com.switchfully.eurder.service.members.dto.NewMemberDto;
+import com.switchfully.eurder.service.orders.dto.OrderItemDto;
 import com.switchfully.eurder.security.SecurityService;
 import com.switchfully.eurder.service.exceptions.NoItemInListException;
 import org.slf4j.Logger;

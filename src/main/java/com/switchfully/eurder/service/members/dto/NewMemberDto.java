@@ -1,4 +1,4 @@
-package com.switchfully.eurder.domain.members;
+package com.switchfully.eurder.service.members.dto;
 
 public class NewMemberDto {
     private String firstName;

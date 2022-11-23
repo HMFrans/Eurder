@@ -1,4 +1,4 @@
-package com.switchfully.eurder.servicetests;
+package com.switchfully.eurder.ValidatorTest;
 
 import com.switchfully.eurder.service.items.dto.AddItemDto;
 import com.switchfully.eurder.service.items.ItemService;

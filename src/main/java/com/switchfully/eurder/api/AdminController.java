@@ -23,11 +23,11 @@ public class AdminController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(path = "/{userId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(path = "/{userId}",produces = MediaType.APPLICATION_JSON_VALUE)
     public void makeMemberAdmin(@RequestHeader String authorization, @PathVariable Integer userId) {
         securityService.validateAuthorization(authorization, Feature.MAKE_ADMIN);
         customerService.makeAdmin(userId);
-        logger.info("Member " + userId + "was upgraded to admin");
+        logger.info("Member " + userId + " was upgraded to admin");
     }
 
 

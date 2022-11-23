@@ -1,21 +1,20 @@
 package com.switchfully.eurder.domain.customers;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "address")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_seq")
-    @SequenceGenerator(name = "address_seq", sequenceName = "address_seq",allocationSize = 1)
+    @SequenceGenerator(name = "address_seq", sequenceName = "address_seq", allocationSize = 1)
     private Integer id;
     @Column(name = "city")
     private String city;
     @Column(name = "postalcode")
     private String postalCode;
     @Column(name = "street_name")
-    private String StreetName;
+    private String streetName;
     @Column(name = "house_number")
     private String houseNumber;
     @Column(name = "additional_info")
@@ -27,7 +26,7 @@ public class Address {
     public Address(String city, String postalCode, String streetName, String houseNumber, String additionalInfo) {
         this.city = city;
         this.postalCode = postalCode;
-        StreetName = streetName;
+        this.streetName = streetName;
         this.houseNumber = houseNumber;
         this.additionalInfo = additionalInfo;
     }
@@ -41,7 +40,7 @@ public class Address {
     }
 
     public String getStreetName() {
-        return StreetName;
+        return streetName;
     }
 
     public String getHouseNumber() {

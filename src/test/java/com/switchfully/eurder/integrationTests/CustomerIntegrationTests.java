@@ -3,11 +3,13 @@ package com.switchfully.eurder.integrationTests;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureTestDatabase
 public class CustomerIntegrationTests {
 
     @LocalServerPort
@@ -39,7 +41,7 @@ public class CustomerIntegrationTests {
                 .given()
                 .auth()
                 .preemptive()
-                .basic("admin", "password")
+                .basic("admin@test.com", "password")
                 .baseUri("http://localhost")
                 .port(port)
                 .when()
@@ -57,7 +59,7 @@ public class CustomerIntegrationTests {
                 .given()
                 .auth()
                 .preemptive()
-                .basic("admin", "password")
+                .basic("admin@test.com", "password")
                 .baseUri("http://localhost")
                 .port(port)
                 .when()
@@ -75,7 +77,7 @@ public class CustomerIntegrationTests {
                 .given()
                 .auth()
                 .preemptive()
-                .basic("admin", "password")
+                .basic("admin@test.com", "password")
                 .baseUri("http://localhost")
                 .port(port)
                 .when()
@@ -93,7 +95,7 @@ public class CustomerIntegrationTests {
                 .given()
                 .auth()
                 .preemptive()
-                .basic("admin", "password")
+                .basic("admin@test.com", "password")
                 .baseUri("http://localhost")
                 .port(port)
                 .when()

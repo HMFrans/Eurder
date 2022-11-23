@@ -13,7 +13,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_group_seq")
     @SequenceGenerator(name = "item_group_seq", sequenceName = "item_group_seq",allocationSize = 1)
-    private String Id;
+    private Integer Id;
 
     @Column(name = "total_price")
     private BigDecimal totalPrice = BigDecimal.valueOf(0);
@@ -28,21 +28,10 @@ public class Order {
 
     public Order(Customer customer) {
         this.customer = customer;
-
     }
-
-
-    public BigDecimal calculateTotalPrice(List<ItemGroup> itemGroupList) {
-        return itemGroupList.stream()
-                .map((itemGroup -> itemGroup.getItemGroupPrice()))
-                .reduce(BigDecimal.valueOf(0), (itemPrice1, itemprice2) -> itemPrice1.add(itemprice2));
-    }
-
-
-    public String getId() {
+    public Integer getId() {
         return Id;
     }
-
 
     public BigDecimal getTotalPrice() {
         return totalPrice;
@@ -50,5 +39,9 @@ public class Order {
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

@@ -2,27 +2,27 @@ package com.switchfully.eurder.service.customers;
 
 import com.switchfully.eurder.domain.customers.Address;
 import com.switchfully.eurder.domain.customers.Customer;
-import com.switchfully.eurder.service.customers.dto.NewMemberDto;
-import com.switchfully.eurder.service.customers.dto.ReturnMemberDto;
+import com.switchfully.eurder.service.customers.dto.NewCustomerDto;
+import com.switchfully.eurder.service.customers.dto.ReturnCustomerDto;
 
 
 public class CustomerMapper {
-    public Customer DtoToMember(NewMemberDto newMemberDto) {
-        return new Customer(newMemberDto.getPassword(),
-                newMemberDto.getFirstName(),
-                newMemberDto.getLastName(),
-                newMemberDto.getEmailAddress(),
-                newMemberDto.getPhoneNumber(),
+    public Customer DtoToMember(NewCustomerDto newCustomerDto) {
+        return new Customer(newCustomerDto.getPassword(),
+                newCustomerDto.getFirstName(),
+                newCustomerDto.getLastName(),
+                newCustomerDto.getEmailAddress(),
+                newCustomerDto.getPhoneNumber(),
                 new Address(
-                        newMemberDto.getCity(),
-                        newMemberDto.getPostalCode(),
-                        newMemberDto.getStreetName(),
-                        newMemberDto.getHouseNumber(),
-                        newMemberDto.getAdditionalInfo()
+                        newCustomerDto.getCity(),
+                        newCustomerDto.getPostalCode(),
+                        newCustomerDto.getStreetName(),
+                        newCustomerDto.getHouseNumber(),
+                        newCustomerDto.getAdditionalInfo()
                 ));
     }
 
-    public ReturnMemberDto memberToDto(Customer customer) {
-        return new ReturnMemberDto(customer.getId(), customer.getFirstName(), customer.getLastName(), customer.getEmailAddress(), customer.getAddress(), customer.getPhoneNumber());
+    public ReturnCustomerDto memberToDto(Customer customer) {
+        return new ReturnCustomerDto(customer.getId(), customer.getFirstName(), customer.getLastName(), customer.getEmailAddress(), customer.getAddress(), customer.getPhoneNumber());
     }
 }

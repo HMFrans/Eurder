@@ -1,7 +1,7 @@
 package com.switchfully.eurder.api;
 
-import com.switchfully.eurder.service.customers.dto.NewMemberDto;
-import com.switchfully.eurder.service.customers.dto.ReturnMemberDto;
+import com.switchfully.eurder.service.customers.dto.NewCustomerDto;
+import com.switchfully.eurder.service.customers.dto.ReturnCustomerDto;
 import com.switchfully.eurder.security.Feature;
 import com.switchfully.eurder.security.SecurityService;
 import com.switchfully.eurder.service.customers.CustomerService;
@@ -27,25 +27,25 @@ public class CustomerController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ReturnMemberDto createNewMember(@RequestBody NewMemberDto newMemberDto) {
-        logger.info("Adding member to database");
-        return customerService.addNewCustomer(newMemberDto);
+    public ReturnCustomerDto createNewCustomer(@RequestBody NewCustomerDto newCustomerDto) {
+        logger.info("Adding customer to database");
+        return customerService.addNewCustomer(newCustomerDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ReturnMemberDto> getAllMembers(@RequestHeader String authorization) {
+    public List<ReturnCustomerDto> getAllCustomers(@RequestHeader String authorization) {
         securityService.validateAuthorization(authorization, Feature.GET_ALL_MEMBERS);
-        logger.info("Getting all members");
+        logger.info("Getting all customers");
         return customerService.getAllCustomers();
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(path = "/{memberId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ReturnMemberDto getMember(@RequestHeader String authorization, @PathVariable Integer memberId) {
+    @GetMapping(path = "/{CustomerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ReturnCustomerDto getCustomer(@RequestHeader String authorization, @PathVariable Integer CustomerId) {
         securityService.validateAuthorization(authorization, Feature.GET_MEMBER);
-        logger.info("Getting member: " + memberId);
-        return customerService.getCustomer(memberId);
+        logger.info("Getting member: " + CustomerId);
+        return customerService.getCustomer(CustomerId);
     }
 
 }

@@ -1,12 +1,11 @@
 package com.switchfully.eurder.service.customers;
 
-import com.switchfully.eurder.domain.customers.Address;
 import com.switchfully.eurder.domain.customers.AddressRepository;
 import com.switchfully.eurder.domain.customers.Customer;
 import com.switchfully.eurder.domain.customers.CustomerRepository;
 import com.switchfully.eurder.security.Role;
-import com.switchfully.eurder.service.customers.dto.NewMemberDto;
-import com.switchfully.eurder.service.customers.dto.ReturnMemberDto;
+import com.switchfully.eurder.service.customers.dto.NewCustomerDto;
+import com.switchfully.eurder.service.customers.dto.ReturnCustomerDto;
 import com.switchfully.eurder.service.Validator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,27 +28,27 @@ public class CustomerService {
         this.customerMapper = new CustomerMapper();
     }
 
-    public ReturnMemberDto addNewCustomer(NewMemberDto newMemberDto) {
-        validator.checkRequiredFieldsForNewMember(newMemberDto);
-        assertEmailIsUnique(newMemberDto);
+    public ReturnCustomerDto addNewCustomer(NewCustomerDto newCustomerDto) {
+        validator.checkRequiredFieldsForNewMember(newCustomerDto);
+        assertEmailIsUnique(newCustomerDto);
         //TODO check if the address is not already in the db
-        Customer newCustomer = customerMapper.DtoToMember(newMemberDto);
+        Customer newCustomer = customerMapper.DtoToMember(newCustomerDto);
         customerRepository.save(newCustomer);
         return customerMapper.memberToDto(newCustomer);
     }
 
-    private void assertEmailIsUnique(NewMemberDto newMemberDto) {
-        if (customerRepository.existsByEmailAddress(newMemberDto.getEmailAddress())) {
+    private void assertEmailIsUnique(NewCustomerDto newCustomerDto) {
+        if (customerRepository.existsByEmailAddress(newCustomerDto.getEmailAddress())) {
             throw new IllegalArgumentException("this email is already in use");
         }
     }
 
-    public void makeAdmin(String emailAddress) {
-        Customer customer = customerRepository.findCustomerByEmailAddress(emailAddress);
+    public void makeAdmin(Integer customerId) {
+        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new IllegalArgumentException("no user by that id"));
         customer.setRole(Role.ADMIN);
     }
 
-    public List<ReturnMemberDto> getAllCustomers() {
+    public List<ReturnCustomerDto> getAllCustomers() {
         return customerRepository.findAll()
                 .stream()
                 .map(customer -> customerMapper.memberToDto(customer))
@@ -57,7 +56,7 @@ public class CustomerService {
 
     }
 
-    public ReturnMemberDto getCustomer(Integer memberId) {
+    public ReturnCustomerDto getCustomer(Integer memberId) {
         return customerMapper.memberToDto(customerRepository.findById(memberId).orElseThrow(() -> new NoSuchElementException("No customer found by this id")));
     }
 

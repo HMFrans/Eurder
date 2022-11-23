@@ -1,35 +1,33 @@
 package com.switchfully.eurder.service.orders.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.List;
 
 public class ReturnOrderDto {
-    private String orderId;
-    private String orderedBy;
-    private HashMap<String, LocalDate> shippingDates;
+    private Integer orderId;
+    private List<ItemGroupReturnDto> itemGroupReturnDtoList;
     private BigDecimal totalCost;
 
-    public ReturnOrderDto(String orderId, String orderedBy, HashMap<String, LocalDate> shippingDates, BigDecimal totalPrice) {
+    public ReturnOrderDto(Integer orderId, BigDecimal totalPrice) {
         this.orderId = orderId;
-        this.orderedBy = orderedBy;
-        this.shippingDates = shippingDates;
         this.totalCost = totalPrice;
     }
 
-    public String getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public HashMap<String, LocalDate> getShippingDates() {
-        return shippingDates;
+    public List<ItemGroupReturnDto> getItemGroupReturnDtoList() {
+        return itemGroupReturnDtoList;
     }
 
     public BigDecimal getTotalCost() {
         return totalCost;
     }
 
-    public String getOrderedBy() {
-        return orderedBy;
+
+
+    public void setItemGroupReturnDtoList(List<ItemGroupReturnDto> itemGroupReturnDtoList) {
+        this.itemGroupReturnDtoList = itemGroupReturnDtoList;
     }
 }

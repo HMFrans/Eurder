@@ -29,7 +29,7 @@ create sequence order_seq start with 1 increment by 1;
 create table Customer_order
 (
     id              integer primary key,
-    total_price     numeric,
+    total_price     double precision,
     customer_id     integer references customer
 );
 
@@ -39,9 +39,9 @@ create table item_group
 (
     id                  integer primary key,
     item_name           varchar,
-    amount_ordered      varchar,
+    amount_ordered      integer,
     shipping_date       date,
-    item_group_price    numeric,
+    item_group_price    double precision,
     order_id            integer references Customer_order
 );
 
@@ -52,6 +52,6 @@ create table item
     id              integer primary key,
     name            varchar,
     description     varchar,
-    price           numeric,
+    price           double precision,
     amount_in_stock integer
 );

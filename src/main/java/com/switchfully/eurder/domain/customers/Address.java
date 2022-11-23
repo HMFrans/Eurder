@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Address")
+@Table(name = "address")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_seq")
@@ -52,16 +52,4 @@ public class Address {
         return additionalInfo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Address address = (Address) o;
-        return Objects.equals(city, address.city) && Objects.equals(postalCode, address.postalCode) && Objects.equals(StreetName, address.StreetName) && Objects.equals(houseNumber, address.houseNumber) && Objects.equals(additionalInfo, address.additionalInfo);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(city, postalCode, StreetName, houseNumber, additionalInfo);
-    }
 }

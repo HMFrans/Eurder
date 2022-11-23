@@ -2,7 +2,7 @@ package com.switchfully.eurder.servicetests;
 
 import com.switchfully.eurder.service.items.dto.AddItemDto;
 import com.switchfully.eurder.service.items.ItemService;
-import com.switchfully.eurder.service.customers.dto.NewMemberDto;
+import com.switchfully.eurder.service.customers.dto.NewCustomerDto;
 
 import com.switchfully.eurder.service.customers.CustomerService;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ class ValidatorTest {
 
     @Test
     void givenNoFirstName_ExceptionIsThrown() {
-        NewMemberDto newMemberDto = new NewMemberDto("",
+        NewCustomerDto newCustomerDto = new NewCustomerDto("",
                 "Squarepants",
                 "spongebob@hotmail.com",
                 "Bikini Bottom",
@@ -32,11 +32,11 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newCustomerDto));
     }
     @Test
     void givenNoLastName_ExceptionIsThrown() {
-        NewMemberDto newMemberDto = new NewMemberDto("Spongebob",
+        NewCustomerDto newCustomerDto = new NewCustomerDto("Spongebob",
                 "",
                 "spongebob@hotmail.com",
                 "Bikini Bottom",
@@ -46,12 +46,12 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newCustomerDto));
     }
 
     @Test
     void givenNoemailAddress_ExceptionIsThrown() {
-        NewMemberDto newMemberDto = new NewMemberDto("Spongebob",
+        NewCustomerDto newCustomerDto = new NewCustomerDto("Spongebob",
                 "Squarepants",
                 "",
                 "Bikini Bottom",
@@ -61,12 +61,12 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newCustomerDto));
     }
 
     @Test
     void givenNoCity_ExceptionIsThrown() {
-        NewMemberDto newMemberDto = new NewMemberDto("Spongebob",
+        NewCustomerDto newCustomerDto = new NewCustomerDto("Spongebob",
                 "Squarepants",
                 "spongebob@hotmail.com",
                 "",
@@ -76,12 +76,12 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newCustomerDto));
     }
 
     @Test
     void givenNoPostalCode_ExceptionIsThrown() {
-        NewMemberDto newMemberDto = new NewMemberDto("Spongebob",
+        NewCustomerDto newCustomerDto = new NewCustomerDto("Spongebob",
                 "Squarepants",
                 "spongebob@hotmail.com",
                 "Bikini Bottom",
@@ -91,12 +91,12 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newCustomerDto));
     }
 
     @Test
     void givenNoStreetName_ExceptionIsThrown() {
-        NewMemberDto newMemberDto = new NewMemberDto("Spongebob",
+        NewCustomerDto newCustomerDto = new NewCustomerDto("Spongebob",
                 "Squarepants",
                 "spongebob@hotmail.com",
                 "Bikini Bottom",
@@ -106,12 +106,12 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newCustomerDto));
     }
 
     @Test
     void givenNoHouseNumber_ExceptionIsThrown() {
-        NewMemberDto newMemberDto = new NewMemberDto("Spongebob",
+        NewCustomerDto newCustomerDto = new NewCustomerDto("Spongebob",
                 "Squarepants",
                 "spongebob@hotmail.com",
                 "Bikini Bottom",
@@ -121,12 +121,12 @@ class ValidatorTest {
                 "",
                 "555-58",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newCustomerDto));
     }
 
     @Test
     void givenNoPhoneNumber_ExceptionIsThrown() {
-        NewMemberDto newMemberDto = new NewMemberDto("Spongebob",
+        NewCustomerDto newCustomerDto = new NewCustomerDto("Spongebob",
                 "Squarepants",
                 "spongebob@hotmail.com",
                 "Bikini Bottom",
@@ -136,7 +136,7 @@ class ValidatorTest {
                 "",
                 "",
                 "password");
-        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newMemberDto));
+        assertThrows(IllegalArgumentException.class, () -> customerService.addNewCustomer(newCustomerDto));
     }
 
     @Test

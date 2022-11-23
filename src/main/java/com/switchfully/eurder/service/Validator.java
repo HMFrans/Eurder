@@ -1,7 +1,7 @@
 package com.switchfully.eurder.service;
 
 import com.switchfully.eurder.service.items.dto.AddItemDto;
-import com.switchfully.eurder.service.customers.dto.NewMemberDto;
+import com.switchfully.eurder.service.customers.dto.NewCustomerDto;
 import com.switchfully.eurder.service.orders.dto.OrderItemDto;
 
 import java.util.List;
@@ -9,29 +9,29 @@ import java.util.List;
 public class Validator {
 
 
-    public void checkRequiredFieldsForNewMember(NewMemberDto newMemberDto) {
-        if (newMemberDto.getFirstName() == null || newMemberDto.getFirstName().equals("")) {
+    public void checkRequiredFieldsForNewMember(NewCustomerDto newCustomerDto) {
+        if (newCustomerDto.getFirstName() == null || newCustomerDto.getFirstName().equals("")) {
             throw new IllegalArgumentException("Please enter a first name.");
         }
-        if (newMemberDto.getLastName() == null || newMemberDto.getLastName().equals("")) {
+        if (newCustomerDto.getLastName() == null || newCustomerDto.getLastName().equals("")) {
             throw new IllegalArgumentException("Please enter a last name.");
         }
-        if (newMemberDto.getEmailAddress() == null || newMemberDto.getEmailAddress().equals("")) {
+        if (newCustomerDto.getEmailAddress() == null || newCustomerDto.getEmailAddress().equals("")) {
             throw new IllegalArgumentException("Please enter an email address.");
         }
-        if (newMemberDto.getCity() == null || newMemberDto.getCity().equals("")) {
+        if (newCustomerDto.getCity() == null || newCustomerDto.getCity().equals("")) {
             throw new IllegalArgumentException("Please enter a city.");
         }
-        if (newMemberDto.getPostalCode() == null || newMemberDto.getPostalCode().equals("")) {
+        if (newCustomerDto.getPostalCode() == null || newCustomerDto.getPostalCode().equals("")) {
             throw new IllegalArgumentException("Please enter a first name.");
         }
-        if (newMemberDto.getStreetName() == null || newMemberDto.getStreetName().equals("")) {
+        if (newCustomerDto.getStreetName() == null || newCustomerDto.getStreetName().equals("")) {
             throw new IllegalArgumentException("Please enter a street.");
         }
-        if (newMemberDto.getHouseNumber() == null || newMemberDto.getHouseNumber().equals("")) {
+        if (newCustomerDto.getHouseNumber() == null || newCustomerDto.getHouseNumber().equals("")) {
             throw new IllegalArgumentException("Please enter a house number.");
         }
-        if (newMemberDto.getPhoneNumber() == null || newMemberDto.getPhoneNumber().equals("")) {
+        if (newCustomerDto.getPhoneNumber() == null || newCustomerDto.getPhoneNumber().equals("")) {
             throw new IllegalArgumentException("Please enter a phone number.");
         }
     }

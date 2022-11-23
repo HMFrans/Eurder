@@ -1,6 +1,6 @@
 package com.switchfully.eurder.service.customers.dto;
 
-public class NewMemberDto {
+public class NewCustomerDto {
     private String firstName;
     private String LastName;
     private String emailAddress;
@@ -12,7 +12,7 @@ public class NewMemberDto {
     private String phoneNumber;
     private String password;
 
-    public NewMemberDto(String firstName, String lastName, String emailAddress, String city, String postalCode, String streetName, String houseNumber, String additionalInfo, String phoneNumber, String password) {
+    public NewCustomerDto(String firstName, String lastName, String emailAddress, String city, String postalCode, String streetName, String houseNumber, String additionalInfo, String phoneNumber, String password) {
         this.firstName = firstName;
         LastName = lastName;
         this.emailAddress = emailAddress;

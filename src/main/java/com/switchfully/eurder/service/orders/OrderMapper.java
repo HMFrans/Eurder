@@ -1,26 +1,33 @@
 package com.switchfully.eurder.service.orders;
 
-import com.switchfully.eurder.domain.orders.Order;
-import com.switchfully.eurder.service.orders.dto.ReturnOrderDto;
 
-import java.time.LocalDate;
-import java.util.HashMap;
+import com.switchfully.eurder.domain.orders.ItemGroup;
+import com.switchfully.eurder.domain.orders.Order;
+import com.switchfully.eurder.service.orders.dto.ItemGroupReturnDto;
+import com.switchfully.eurder.service.orders.dto.OrderOverviewDto;
+import com.switchfully.eurder.service.orders.dto.ReturnOrderDto;
 import java.util.List;
 
-public class OrderMapper {
-    public ReturnOrderDto OrderToReturnDto(Order order) {
-        return new ReturnOrderDto(order.getId(),
-                order.getCustomer().getEmailAddress(), createOrderOverview(order),
-                order.getTotalPrice());
-    }
 
-    private HashMap<String, LocalDate> createOrderOverview(Order order) {
-//        HashMap<String, LocalDate> orderOverview = new HashMap<>();
-//        order.getItemGroupList().forEach(itemGroup -> orderOverview.put(itemGroup.getItemName(), itemGroup.getShippingDate()));
-        return null;
+public class OrderMapper {
+
+    public ReturnOrderDto OrderToReturnOrderDto(Order order) {
+        return new ReturnOrderDto(
+                order.getId(),
+                order.getTotalPrice()
+                );
     }
 
     public List<ReturnOrderDto> orderListToReturnDtoList(List<Order> listOfOrders) {
-        return listOfOrders.stream().map(order -> OrderToReturnDto(order)).toList();
+        return listOfOrders.stream().map(order -> OrderToReturnOrderDto(order)).toList();
     }
+
+    public ItemGroupReturnDto ItemGroupToReturnDto(ItemGroup itemGroup) {
+        return new ItemGroupReturnDto(itemGroup.getItemName(), itemGroup.getAmountOrdered(), itemGroup.getShippingDate());
+    }
+
+    public OrderOverviewDto createOrderOverviewDto(List<ReturnOrderDto> returnOrderDtoList) {
+        return new OrderOverviewDto(returnOrderDtoList);
+    }
+
 }

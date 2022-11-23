@@ -6,9 +6,11 @@ import com.switchfully.eurder.service.customers.CustomerService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
+@AutoConfigureTestDatabase
 public class AdminServiceTest {
     @Autowired
     private CustomerService customerService;
@@ -17,9 +19,9 @@ public class AdminServiceTest {
 
     @Test
     void givenMemberId_UpgradesToAdmin() {
-        customerService.makeAdmin("member");
+        customerService.makeAdmin(2);
 
-        Assertions.assertEquals(Role.ADMIN, customerRepository.g("member").getRole());
+        Assertions.assertEquals(Role.ADMIN, customerRepository.findById(2).orElseThrow().getRole());
     }
 
 }

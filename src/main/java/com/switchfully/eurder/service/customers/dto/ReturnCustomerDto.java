@@ -2,7 +2,7 @@ package com.switchfully.eurder.service.customers.dto;
 
 import com.switchfully.eurder.domain.customers.Address;
 
-public class ReturnMemberDto {
+public class ReturnCustomerDto {
     private Integer id;
     private String firstName;
     private String LastName;
@@ -10,7 +10,7 @@ public class ReturnMemberDto {
     private Address address;
     private String phoneNumber;
 
-    public ReturnMemberDto(Integer id, String firstName, String lastName, String emailAddress, Address address, String phoneNumber) {
+    public ReturnCustomerDto(Integer id, String firstName, String lastName, String emailAddress, Address address, String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         LastName = lastName;

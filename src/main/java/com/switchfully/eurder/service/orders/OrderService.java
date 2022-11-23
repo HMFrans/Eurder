@@ -1,18 +1,19 @@
 package com.switchfully.eurder.service.orders;
 
 import com.switchfully.eurder.domain.customers.Customer;
-import com.switchfully.eurder.domain.items.ItemRepository;
 import com.switchfully.eurder.domain.orders.*;
 import com.switchfully.eurder.service.Validator;
 import com.switchfully.eurder.service.customers.CustomerService;
-import com.switchfully.eurder.service.items.ItemGroupService;
 import com.switchfully.eurder.service.items.ItemService;
 import com.switchfully.eurder.service.orders.dto.OrderItemDto;
+import com.switchfully.eurder.service.orders.dto.OrderOverviewDto;
 import com.switchfully.eurder.service.orders.dto.ReturnOrderDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -26,6 +27,7 @@ public class OrderService {
     private final CustomerService customerService;
 
     public OrderService(ItemGroupService itemGroupService, ItemService itemService, OrderRepository orderRepository, CustomerService customerService) {
+
         this.itemGroupService = itemGroupService;
         this.itemService = itemService;
         this.orderRepository = orderRepository;
@@ -34,28 +36,48 @@ public class OrderService {
 
 
     public ReturnOrderDto createNewOrder(String emailAddress, List<OrderItemDto> orderItemDtoList) {
-        //check if the itemlist has items and if those items are in the DB
         validator.checkItemListOnNewOrder(orderItemDtoList);
-        // create new empty order in the db
+        //TODO check if items is in db
         Customer customer = customerService.getCustomerByEmail(emailAddress);
         Order newOrder = orderRepository.save(new Order(customer));
-        //create item groups for the items in the list and reference them to the order
-        itemGroupService.createItemGroups(orderItemDtoList, newOrder);
 
-        // reduce stock levels of ordered items (can happen in itemgroupservice?)
-
-        // calculate the total price
+        itemGroupService.createItemGroupsInDatabase(orderItemDtoList, newOrder);
         reduceStockLevels(orderItemDtoList);
-        return orderMapper.OrderToReturnDto(newOrder);
+        newOrder.setTotalPrice(calculateTotalPrice(itemGroupService.getItemGroupsForOrder(newOrder)));
+
+        ReturnOrderDto returnOrderDto = createReturnOrderDto(newOrder);
+        return returnOrderDto;
     }
 
-    private void reduceStockLevels(List<OrderItemDto> orderItemDtoList) {
-        //TODO fix this so the reduction of stock takes place
-        //orderItemDtoList.forEach(orderItemDto -> itemService.reduceStockLevel(orderItemDto.getName(), orderItemDto.getAmount()));
+    private ReturnOrderDto createReturnOrderDto(Order newOrder) {
+        ReturnOrderDto returnOrderDto = orderMapper.OrderToReturnOrderDto(newOrder);
+        setGroupItemReturnListForReturnOrderDto(newOrder, returnOrderDto);
+        return returnOrderDto;
     }
 
-    public List<ReturnOrderDto> getAllOrdersByMember(String emailAddress) {
-        return null;
+    private void setGroupItemReturnListForReturnOrderDto(Order newOrder, ReturnOrderDto returnOrderDto) {
+        returnOrderDto.setItemGroupReturnDtoList(itemGroupService.getItemGroupsForOrder(newOrder).stream()
+                .map(itemGroup -> orderMapper.ItemGroupToReturnDto(itemGroup))
+                .collect(Collectors.toList()));
+    }
+
+    public BigDecimal calculateTotalPrice(List<ItemGroup> itemGroupList) {
+        return itemGroupList.stream()
+                .map(itemGroup -> itemGroup.getItemGroupPrice())
+                .reduce(BigDecimal.valueOf(0), (itemPrice1, itemPrice2) -> itemPrice1.add(itemPrice2));
+    }
+
+    public void reduceStockLevels(List<OrderItemDto> orderItemDtoList) {
+        orderItemDtoList.forEach(orderItemDto -> itemService.reduceStockLevel(orderItemDto));
+    }
+
+    public OrderOverviewDto getAllOrdersByMember(String emailAddress) {
+        Integer customerId = customerService.getCustomerByEmail(emailAddress).getId();
+        List<Order> orderList = orderRepository.findAllByCustomer_Id(customerId).stream().toList();
+        List<ReturnOrderDto> returnOrderDtoList = orderList.stream()
+                .map(returnOrderDto -> createReturnOrderDto(returnOrderDto))
+                .collect(Collectors.toList());
+        return orderMapper.createOrderOverviewDto(returnOrderDtoList);
     }
 
 

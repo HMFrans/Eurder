@@ -1,14 +1,16 @@
 package com.switchfully.eurder.servicetests;
 
 import com.switchfully.eurder.service.customers.CustomerService;
-import com.switchfully.eurder.service.customers.dto.NewMemberDto;
-import com.switchfully.eurder.service.customers.dto.ReturnMemberDto;
+import com.switchfully.eurder.service.customers.dto.NewCustomerDto;
+import com.switchfully.eurder.service.customers.dto.ReturnCustomerDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
+@AutoConfigureTestDatabase
 class CustomerServiceTest {
     @Autowired
     private CustomerService customerService;
@@ -17,9 +19,9 @@ class CustomerServiceTest {
 
     @Test
     void givenNewMemberDto_MemberGetsAddedToRepository() {
-        NewMemberDto newMemberDto = new NewMemberDto("Spongebob", "Squarepants", "spongebob@hotmail.com", "Bikini Bottom", "1000", "waterstreet", "1", "", "555-58", "password");
-        ReturnMemberDto newReturnMemberDto = customerService.addNewCustomer(newMemberDto);
+        NewCustomerDto newCustomerDto = new NewCustomerDto("Spongebob", "Squarepants", "spongebob@hotmail.com", "Bikini Bottom", "1000", "waterstreet", "1", "", "555-58", "password");
+        ReturnCustomerDto newReturnCustomerDto = customerService.addNewCustomer(newCustomerDto);
 
-        Assertions.assertTrue(memberRepository.getMembers().stream().anyMatch(member -> newReturnMemberDto.getId().equals(member.getId())));
+        Assertions.assertTrue(memberRepository.getMembers().stream().anyMatch(member -> newReturnCustomerDto.getId().equals(member.getId())));
     }
 }

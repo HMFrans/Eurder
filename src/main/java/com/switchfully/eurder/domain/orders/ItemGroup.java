@@ -23,8 +23,6 @@ public class ItemGroup {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
-    private final int DAYS_TO_SHIP_WHEN_ITEM_NOT_IN_STOCK = 7;
-    private final int DAYS_TO_SHIP_WHEN_IN_STOCK = 1;
 
     public ItemGroup() {
     }
@@ -35,11 +33,7 @@ public class ItemGroup {
         this.shippingDate = shippingDate;
         this.itemGroupPrice = itemGroupPrice;
         this.order = order;
-
-
     }
-
-
 
     public BigDecimal getItemGroupPrice() {
         return itemGroupPrice;
@@ -53,18 +47,7 @@ public class ItemGroup {
         return shippingDate;
     }
 
-    @Override
-    public String toString() {
-        return "ItemGroup{" +
-                "itemName='" + itemName + '\'' +
-                ", amountOrdered=" + amountOrdered +
-                ", shippingDate=" + shippingDate +
-                ", itemGroupPrice=" + itemGroupPrice +
-                ", DAYS_TO_SHIP_WHEN_ITEM_NOT_IN_STOCK=" + DAYS_TO_SHIP_WHEN_ITEM_NOT_IN_STOCK +
-                ", DAYS_TO_SHIP_WHEN_IN_STOCK=" + DAYS_TO_SHIP_WHEN_IN_STOCK +
-                '}';
+    public Integer getAmountOrdered() {
+        return amountOrdered;
     }
-    //ToDo item amount needs to be decreased in stock
-    //ToDo What if an item is not found?
-    //
 }

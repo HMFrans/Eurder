@@ -10,3 +10,5 @@ values (nextval('customer_seq'), 'password', 'admin', 'master', 'admin@test.com'
 insert into customer
 values (nextval('customer_seq'), 'password', 'customer', 'paying', 'customer@test.com', '555/555555', 2, 'MEMBER' );
 
+insert into customer
+values (nextval('customer_seq'), 'password', 'customerToAdmin', 'paying', 'customerToAdmin@test.com', '555/555555', 2, 'MEMBER' );

@@ -44,7 +44,7 @@ public class CustomerController {
     @GetMapping(path = "/{CustomerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ReturnCustomerDto getCustomer(@RequestHeader String authorization, @PathVariable Integer CustomerId) {
         securityService.validateAuthorization(authorization, Feature.GET_MEMBER);
-        logger.info("Getting member: " + CustomerId);
+        logger.info("Getting customer: " + CustomerId);
         return customerService.getCustomer(CustomerId);
     }
 

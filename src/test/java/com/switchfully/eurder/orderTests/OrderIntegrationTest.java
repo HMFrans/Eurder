@@ -1,7 +1,10 @@
-package com.switchfully.eurder.integrationTests;
+package com.switchfully.eurder.orderTests;
 
+import com.switchfully.eurder.service.orders.dto.OrderOverviewDto;
+import com.switchfully.eurder.service.orders.dto.ReturnOrderDto;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,104 +13,97 @@ import org.springframework.http.HttpStatus;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase
-public class CustomerIntegrationTests {
-
+public class OrderIntegrationTest {
     @LocalServerPort
     private int port;
 
     @Test
-    void AddNewMember_HappyPath() {
+    void createOrderByCustomer_HappyPath() {
+        String body = "[{\"name\":\"flour\",\"amount\":2},{\"name\":\"egg\",\"amount\":1}]";
 
-        String body = "{\"firstName\":\"Spongebob\",\"lastName\":\"Squarepants\",\"emailAddress\":\"Squarepants@hotmail.com\",\"city\":\"BikiniBottom\",\"postalCode\":\"1000\",\"streetName\":\"waterstreet\",\"houseNumber\":\"1\",\"additionalInfo\":\"string\",\"phoneNumber\":\"string\",\"password\":\"string\"}";
-
-        RestAssured
+        ReturnOrderDto result = RestAssured
                 .given()
+                .auth()
+                .preemptive()
+                .basic("customer@test.com", "password")
                 .baseUri("http://localhost")
                 .port(port)
                 .when()
                 .accept(ContentType.JSON)
                 .body(body)
                 .contentType(ContentType.JSON)
-                .post("/members")
+                .post("/order")
                 .then()
                 .assertThat()
-                .statusCode(HttpStatus.CREATED.value());
+                .statusCode(HttpStatus.CREATED.value())
+                .extract()
+                .as(ReturnOrderDto.class);
+
+        Assertions.assertThat(result.getOrderId()).isNotNull();
+        Assertions.assertThat(result.getTotalCost()).isEqualTo("11.0");
 
     }
 
     @Test
-    void makeAdmin_HappyPath() {
+    void createOrderByNonLoggedInUser_Unauthorized() {
+        String body = "[{\"name\":\"flour\",\"amount\":2},{\"name\":\"egg\",\"amount\":100}]";
+
         RestAssured
                 .given()
                 .auth()
                 .preemptive()
-                .basic("admin@test.com", "password")
+                .basic("notAMember", "password")
                 .baseUri("http://localhost")
                 .port(port)
                 .when()
                 .accept(ContentType.JSON)
+                .body(body)
                 .contentType(ContentType.JSON)
-                .post("/admin/memberToAdmin")
+                .post("/order")
                 .then()
                 .assertThat()
-                .statusCode(HttpStatus.CREATED.value());
+                .statusCode(HttpStatus.UNAUTHORIZED.value());
     }
 
     @Test
-    void getAllMembers_HappyPath() {
-        RestAssured
-                .given()
-                .auth()
-                .preemptive()
-                .basic("admin@test.com", "password")
-                .baseUri("http://localhost")
-                .port(port)
-                .when()
-                .accept(ContentType.JSON)
-                .contentType(ContentType.JSON)
-                .get("/members")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.OK.value());
-    }
+    void createOrderWithoutItems_Exception() {
+        String body = "[]";
 
-    @Test
-    void getMember_happyPath() {
         RestAssured
                 .given()
                 .auth()
                 .preemptive()
-                .basic("admin@test.com", "password")
+                .basic("customer@test.com", "password")
                 .baseUri("http://localhost")
                 .port(port)
                 .when()
                 .accept(ContentType.JSON)
+                .body(body)
                 .contentType(ContentType.JSON)
-                .get("/members/admin")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.OK.value());
-    }
-
-    @Test
-    void getMember_NoSuchMember() {
-        RestAssured
-                .given()
-                .auth()
-                .preemptive()
-                .basic("admin@test.com", "password")
-                .baseUri("http://localhost")
-                .port(port)
-                .when()
-                .accept(ContentType.JSON)
-                .contentType(ContentType.JSON)
-                .get("/members/adminaaaaa")
+                .post("/order")
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.BAD_REQUEST.value());
     }
 
+    @Test
+    void getAllOrdersForSpecificMember_happyPath() {
+        RestAssured
+                .given()
+                .auth()
+                .preemptive()
+                .basic("customer@test.com", "password")
+                .baseUri("http://localhost")
+                .port(port)
+                .when()
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .get("/order")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK.value());
 
+    }
 
 
 }

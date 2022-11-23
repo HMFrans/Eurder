@@ -31,7 +31,7 @@ public class adminIntegrationTest {
                 .when()
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
-                .patch("/admin/2")
+                .patch("/admin/3")
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.CREATED.value());

@@ -38,7 +38,7 @@ public class ItemGroupService {
                         order)));
     }
 
-    private LocalDate calculateShippingDate(OrderItemDto orderItemDto) {
+    public LocalDate calculateShippingDate(OrderItemDto orderItemDto) {
         int itemAmount = itemService.getItemAmountInStock(orderItemDto.getName());
         if (itemAmount - orderItemDto.getAmount() <= 0) {
             return LocalDate.now().plusDays(DAYS_TO_SHIP_WHEN_ITEM_NOT_IN_STOCK);

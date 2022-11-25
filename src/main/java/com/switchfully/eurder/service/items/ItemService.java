@@ -4,7 +4,6 @@ package com.switchfully.eurder.service.items;
 import com.switchfully.eurder.domain.items.Item;
 import com.switchfully.eurder.domain.items.ItemRepository;
 import com.switchfully.eurder.service.items.dto.AddItemDto;
-import com.switchfully.eurder.service.Validator;
 import com.switchfully.eurder.service.orders.dto.OrderItemDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,19 +15,16 @@ import java.math.BigDecimal;
 public class ItemService {
     private final ItemRepository itemRepository;
     private final ItemMapper itemMapper;
-    private final Validator validator;
+    private final ItemValidator itemValidator;
 
-    public ItemService(ItemRepository itemRepository) {
+    public ItemService(ItemRepository itemRepository, ItemValidator itemValidator) {
         this.itemRepository = itemRepository;
-        this.validator = new Validator();
+        this.itemValidator = itemValidator;
         this.itemMapper = new ItemMapper();
     }
 
     public AddItemDto addItem(AddItemDto addItemDto) {
-        validator.checkRequiredFieldsForNewItem(addItemDto);
-        if (itemRepository.existsByName(addItemDto.getName())) {
-            throw new IllegalArgumentException("Item already exists");
-        }
+        itemValidator.validateNewItem(addItemDto);
         Item newItem = itemMapper.dtoToItem(addItemDto);
         return itemMapper.itemToDto(itemRepository.save(newItem));
     }
@@ -42,8 +38,6 @@ public class ItemService {
     }
 
     public void reduceStockLevel(OrderItemDto orderItemDto) {
-        Integer amountInStock = itemRepository.findByName(orderItemDto.getName()).getAmountInStock();
-        itemRepository.findByName(orderItemDto.getName()).setAmountInStock(amountInStock - orderItemDto.getAmount());
-
+        itemRepository.findByName(orderItemDto.getName()).reduceAmountInStock(orderItemDto.getAmount());
     }
 }

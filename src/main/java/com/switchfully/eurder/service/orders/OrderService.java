@@ -2,7 +2,6 @@ package com.switchfully.eurder.service.orders;
 
 import com.switchfully.eurder.domain.customers.Customer;
 import com.switchfully.eurder.domain.orders.*;
-import com.switchfully.eurder.service.Validator;
 import com.switchfully.eurder.service.customers.CustomerService;
 import com.switchfully.eurder.service.items.ItemService;
 import com.switchfully.eurder.service.orders.dto.OrderItemDto;
@@ -19,25 +18,26 @@ import java.util.stream.Collectors;
 @Transactional
 public class OrderService {
 
-    private final OrderMapper orderMapper = new OrderMapper();
+    private final OrderMapper orderMapper;
     private final ItemGroupService itemGroupService;
     private final ItemService itemService;
     private final OrderRepository orderRepository;
-    private final Validator validator = new Validator();
+    private final OrderValidator orderValidator;
     private final CustomerService customerService;
 
-    public OrderService(ItemGroupService itemGroupService, ItemService itemService, OrderRepository orderRepository, CustomerService customerService) {
-
+    public OrderService(OrderMapper orderMapper, ItemGroupService itemGroupService, ItemService itemService, OrderRepository orderRepository, OrderValidator orderValidator, CustomerService customerService) {
+        this.orderMapper = orderMapper;
         this.itemGroupService = itemGroupService;
         this.itemService = itemService;
         this.orderRepository = orderRepository;
+        this.orderValidator = orderValidator;
         this.customerService = customerService;
     }
 
 
     public ReturnOrderDto createNewOrder(String emailAddress, List<OrderItemDto> orderItemDtoList) {
-        validator.checkItemListOnNewOrder(orderItemDtoList);
-        //TODO check if items is in db
+        orderValidator.validateOrderItemDtoList(orderItemDtoList);
+
         Customer customer = customerService.getCustomerByEmail(emailAddress);
         Order newOrder = orderRepository.save(new Order(customer));
 
@@ -45,18 +45,18 @@ public class OrderService {
         reduceStockLevels(orderItemDtoList);
         newOrder.setTotalPrice(calculateTotalPrice(itemGroupService.getItemGroupsForOrder(newOrder)));
 
-        ReturnOrderDto returnOrderDto = createReturnOrderDto(newOrder);
-        return returnOrderDto;
+        return createReturnOrderDto(newOrder);
     }
 
-    private ReturnOrderDto createReturnOrderDto(Order newOrder) {
-        ReturnOrderDto returnOrderDto = orderMapper.OrderToReturnOrderDto(newOrder);
-        setGroupItemReturnListForReturnOrderDto(newOrder, returnOrderDto);
+    private ReturnOrderDto createReturnOrderDto(Order order) {
+        ReturnOrderDto returnOrderDto = orderMapper.OrderToReturnOrderDto(order);
+        setGroupItemReturnListForReturnOrderDto(order, returnOrderDto);
         return returnOrderDto;
     }
 
     private void setGroupItemReturnListForReturnOrderDto(Order newOrder, ReturnOrderDto returnOrderDto) {
-        returnOrderDto.setItemGroupReturnDtoList(itemGroupService.getItemGroupsForOrder(newOrder).stream()
+        returnOrderDto.setItemGroupReturnDtoList(
+                itemGroupService.getItemGroupsForOrder(newOrder).stream()
                 .map(itemGroup -> orderMapper.ItemGroupToReturnDto(itemGroup))
                 .collect(Collectors.toList()));
     }

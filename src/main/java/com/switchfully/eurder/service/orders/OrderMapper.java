@@ -6,9 +6,11 @@ import com.switchfully.eurder.domain.orders.Order;
 import com.switchfully.eurder.service.orders.dto.ItemGroupReturnDto;
 import com.switchfully.eurder.service.orders.dto.OrderOverviewDto;
 import com.switchfully.eurder.service.orders.dto.ReturnOrderDto;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
-
+@Component
 public class OrderMapper {
 
     public ReturnOrderDto OrderToReturnOrderDto(Order order) {
@@ -16,10 +18,6 @@ public class OrderMapper {
                 order.getId(),
                 order.getTotalPrice()
                 );
-    }
-
-    public List<ReturnOrderDto> orderListToReturnDtoList(List<Order> listOfOrders) {
-        return listOfOrders.stream().map(order -> OrderToReturnOrderDto(order)).toList();
     }
 
     public ItemGroupReturnDto ItemGroupToReturnDto(ItemGroup itemGroup) {

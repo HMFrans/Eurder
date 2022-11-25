@@ -1,15 +1,12 @@
-package com.switchfully.eurder.service;
+package com.switchfully.eurder.service.customers;
 
-import com.switchfully.eurder.service.items.dto.AddItemDto;
 import com.switchfully.eurder.service.customers.dto.NewCustomerDto;
-import com.switchfully.eurder.service.orders.dto.OrderItemDto;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
+@Component
+public class CustomerValidator {
 
-public class Validator {
-
-
-    public void checkRequiredFieldsForNewMember(NewCustomerDto newCustomerDto) {
+    public void checkRequiredFieldsForNewCustomer(NewCustomerDto newCustomerDto) {
         if (newCustomerDto.getFirstName() == null || newCustomerDto.getFirstName().equals("")) {
             throw new IllegalArgumentException("Please enter a first name.");
         }
@@ -35,24 +32,4 @@ public class Validator {
             throw new IllegalArgumentException("Please enter a phone number.");
         }
     }
-
-    public void checkRequiredFieldsForNewItem(AddItemDto addItemDto) {
-        if (addItemDto.getName() == null || addItemDto.getName().equals("")) {
-            throw new IllegalArgumentException("Please enter a name.");
-        }
-        if (addItemDto.getDescription() == null || addItemDto.getDescription().equals("")) {
-            throw new IllegalArgumentException("Please enter a description.");
-        }
-        if (addItemDto.getPrice() == null) {
-            throw new IllegalArgumentException("Please enter a price.");
-        }
-    }
-
-    public void checkItemListOnNewOrder(List<OrderItemDto> orderItemDtoList) {
-        if (orderItemDtoList.size() == 0) {
-            throw new IllegalArgumentException("No items to add to order");
-        }
-
-    }
-
 }

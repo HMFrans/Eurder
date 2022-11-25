@@ -7,7 +7,7 @@ import com.switchfully.eurder.service.customers.dto.ReturnCustomerDto;
 
 
 public class CustomerMapper {
-    public Customer DtoToMember(NewCustomerDto newCustomerDto) {
+    public Customer DtoToCustomer(NewCustomerDto newCustomerDto) {
         return new Customer(newCustomerDto.getPassword(),
                 newCustomerDto.getFirstName(),
                 newCustomerDto.getLastName(),
@@ -22,7 +22,7 @@ public class CustomerMapper {
                 ));
     }
 
-    public ReturnCustomerDto memberToDto(Customer customer) {
+    public ReturnCustomerDto customerToDto(Customer customer) {
         return new ReturnCustomerDto(customer.getId(), customer.getFirstName(), customer.getLastName(), customer.getEmailAddress(), customer.getAddress(), customer.getPhoneNumber());
     }
 }

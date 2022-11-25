@@ -45,7 +45,7 @@ public class Item {
         return amountInStock;
     }
 
-    public void setAmountInStock(int amount) {
-        this.amountInStock = amount;
+    public void reduceAmountInStock(Integer amount) {
+        this.amountInStock -= amount;
     }
 }

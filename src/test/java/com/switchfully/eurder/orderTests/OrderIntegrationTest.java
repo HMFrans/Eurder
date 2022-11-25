@@ -1,11 +1,12 @@
 package com.switchfully.eurder.orderTests;
 
-import com.switchfully.eurder.service.orders.dto.OrderOverviewDto;
+import com.switchfully.eurder.domain.items.ItemRepository;
 import com.switchfully.eurder.service.orders.dto.ReturnOrderDto;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -16,6 +17,8 @@ import org.springframework.http.HttpStatus;
 public class OrderIntegrationTest {
     @LocalServerPort
     private int port;
+    @Autowired
+    ItemRepository itemRepository;
 
     @Test
     void createOrderByCustomer_HappyPath() {
@@ -41,6 +44,7 @@ public class OrderIntegrationTest {
 
         Assertions.assertThat(result.getOrderId()).isNotNull();
         Assertions.assertThat(result.getTotalCost()).isEqualTo("11.0");
+        Assertions.assertThat(itemRepository.findByName("egg").getAmountInStock()).isEqualTo(4);
 
     }
 
@@ -102,7 +106,6 @@ public class OrderIntegrationTest {
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.OK.value());
-
     }
 
 
